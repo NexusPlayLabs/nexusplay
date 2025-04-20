@@ -61,7 +61,8 @@ const Welcome = styled.div`
     }
   }
 
-  background: linear-gradient(-45deg, #ffb07c, #ff3e88, #2969ff, #ef3cff, #ff3c87);
+  /* Gradient s limetkovými odtieňmi a tmavou zelenou */
+  background: linear-gradient(-45deg, #6ee800, #338033, #2d7f2f, #1c4e22, #0a2d11);
   background-size: 300% 300%;
   animation: welcome-fade-in .5s ease, backgroundGradient 30s ease infinite;
   border-radius: 10px;
