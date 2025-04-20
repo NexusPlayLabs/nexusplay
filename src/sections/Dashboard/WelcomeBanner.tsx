@@ -21,12 +21,12 @@ const Buttons = styled.div`
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-    padding-top: 0!important;
+    padding-top: 0 !important;
   }
 
   & > button {
     border: none;
-    width: 100%; /* Tlačidlám sa priradí šírka 100% */
+    width: 100%; /* Zabezpečí rovnakú šírku pre všetky tlačidlá */
     max-width: 200px; /* Zabezpečí, že tlačidlá nebudú príliš široké na veľkých obrazovkách */
     border-radius: 10px;
     padding: 10px;
@@ -34,6 +34,7 @@ const Buttons = styled.div`
     transition: background-color .2s ease;
     color: black;
     cursor: pointer;
+    flex: 1; /* Dáva tlačidlám rovnaký "flex" pri rozťahovaní */
     &:hover {
       background: white;
     }
