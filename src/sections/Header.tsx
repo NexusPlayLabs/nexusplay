@@ -40,10 +40,14 @@ const StyledHeader = styled.div`
 `
 
 const Logo = styled(NavLink)`
-  height: 65px;
+  height: auto;
+  width: 100%;
+  max-width: 200px; /* Maximálna šírka loga, ktorá zabezpečí, že logo bude mať rozumnú veľkosť aj na väčších obrazovkách */
   margin: 0 10px;
+  
   & > img {
-    height: 100%;
+    width: 100%;
+    height: auto;
   }
 `
 
