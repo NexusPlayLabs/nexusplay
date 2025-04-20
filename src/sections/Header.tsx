@@ -91,7 +91,7 @@ export default function Header() {
       <StyledHeader>
         <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
           <Logo to="/">
-            <img alt="NexusPlay logo" src="/logo_kruhove.png" />
+            <img alt="NexusPlay logo" src="/logo_casino.png" />
           </Logo>
         </div>
         <div style={{ display: 'flex', gap: '10px', alignItems: 'center', position: 'relative' }}>
