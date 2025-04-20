@@ -6,7 +6,7 @@ export const RPC_ENDPOINT = import.meta.env.VITE_RPC_ENDPOINT ?? 'https://api.ma
 
 // Solana address that will receive fees when somebody plays on this platform
 export const PLATFORM_CREATOR_ADDRESS = new PublicKey(
-  'BgFTqkr4UPyAiyycQypBeWaCChKEhNCW67QbhJTPCf2e',
+  'V2grJiwjs25iJYqumbHyKo5MTK7SFqZSdmoRaj8QWb9',
 )
 
 // Gamba explorer URL - Appears in RecentPlays
@@ -39,8 +39,15 @@ const lp = (tokenMint: PublicKey | string, poolAuthority?: PublicKey | string): 
  * For private pools, add the creator of the Liquidity Pool as a second argument
  */
 export const POOLS = [
+  // Fake token:
+  lp(FAKE_TOKEN_MINT),
   // SOL:
   lp('So11111111111111111111111111111111111111112'),
+  // USDC:
+  lp('EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v'),
+  // Wormhole:
+  lp('85VBFQZC9TZkfaptBWjvUw7YbZjy52A6mjtPGjstQAmQ'),
+  lp('H8cstTfTxPEm5qP3UXgga8Bdzm2MCDGAghJTgovPy6Y1', 'H83nsJJe11WY7TjhiVoDq5xmiYs7rU2iY4FweJuahVz2'),
 ]
 
 // The default token to be selected
@@ -72,7 +79,7 @@ export const TOKEN_METADATA: (Partial<TokenMeta> & {mint: PublicKey})[] = [
 ]
 
 /** HTML to display to user that they need to accept in order to continue */
-export const TOS_HTML = 
+export const TOS_HTML = `
   <p><b>1. Age Requirement:</b> Must be at least 18 years old.</p>
   <p><b>2. Legal Compliance:</b> Follow local laws responsibly.</p>
   <p><b>3. Risk Acknowledgement:</b> Games involve risk; no guaranteed winnings.</p>
@@ -82,7 +89,7 @@ export const TOS_HTML =
   <p><b>7. Fair Play:</b> Games are conducted fairly and transparently.</p>
   <p><b>8. Data Privacy:</b> Your privacy is important to us.</p>
   <p><b>9. Responsible Gaming:</b> Play responsibly; seek help if needed.</p>
-
+`
 
 /**
  * A method for automatically fetching Token Metadata.
