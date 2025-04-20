@@ -39,12 +39,17 @@ const StyledHeader = styled.div
   backdrop-filter: blur(20px);
 
 
-const Logo = styled(NavLink)
-  height: 35px;
+const Logo = styled(NavLink)`
+  height: auto;
+  width: 100%;
+  max-width: 200px; /* Maximálna šírka loga, ktorá zabezpečí, že logo bude mať rozumnú veľkosť aj na väčších obrazovkách */
   margin: 0 10px;
+  
   & > img {
-    height: 100%;
+    width: 100%;
+    height: auto;
   }
+`
 
 
 export default function Header() {
