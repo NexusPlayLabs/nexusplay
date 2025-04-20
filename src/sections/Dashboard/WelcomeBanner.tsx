@@ -39,7 +39,7 @@ const Buttons = styled.div`
   }
 `
 
-const Welcome = styled.div`
+const Welcome = styled.div
   @keyframes welcome-fade-in {
     from {
       opacity: 0;
@@ -61,12 +61,10 @@ const Welcome = styled.div`
     }
   }
 
-  /* Zmena pozadia na obrázok */
-  background-image: url('/welcome_background.png');
-  background-size: cover;
-  background-position: center;
-  animation: welcome-fade-in .5s ease;
-
+  /* Limetkový gradient */
+  background: linear-gradient(-45deg, #c0ff33, #99e600, #66cc00, #4dba00);
+  background-size: 300% 300%;
+  animation: welcome-fade-in .5s ease, backgroundGradient 30s ease infinite;
   border-radius: 10px;
   position: relative;
   overflow: hidden;
@@ -102,7 +100,8 @@ const Welcome = styled.div`
       padding: 40px;
     }
   }
-`
+
+
 
 
 
