@@ -39,7 +39,7 @@ const Buttons = styled.div`
   }
 `
 
-const Welcome = styled.div
+const Welcome = styled.div`
   @keyframes welcome-fade-in {
     from {
       opacity: 0;
@@ -102,6 +102,7 @@ const Welcome = styled.div
       padding: 40px;
     }
   }
+`
 
 
 
