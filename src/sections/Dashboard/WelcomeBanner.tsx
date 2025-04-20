@@ -41,7 +41,7 @@ const Buttons = styled.div`
 
 const Welcome = styled.div`
   /* Použitie obrázka ako pozadia bez animácií a efektov */
-  background: url('/welcome_background.png') no-repeat center center/cover);
+  background: url('/welcome_background.png') no-repeat center center/cover;
   border-radius: 10px;
   position: relative;
   overflow: hidden;
