@@ -4,7 +4,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useUserStore } from '../../hooks/useUserStore'
 
-const Buttons = styled.div`
+const Buttons = styled.div
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -21,12 +21,12 @@ const Buttons = styled.div`
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-    padding-top: 0 !important;
+    padding-top: 0!important;
   }
 
   & > button {
     border: none;
-    width: 100%; /* Zabezpečí rovnakú šírku pre všetky tlačidlá */
+    width: 100%; /* Tlačidlám sa priradí šírka 100% */
     max-width: 200px; /* Zabezpečí, že tlačidlá nebudú príliš široké na veľkých obrazovkách */
     border-radius: 10px;
     padding: 10px;
@@ -34,14 +34,13 @@ const Buttons = styled.div`
     transition: background-color .2s ease;
     color: black;
     cursor: pointer;
-    flex: 1; /* Dáva tlačidlám rovnaký "flex" pri rozťahovaní */
     &:hover {
       background: white;
     }
   }
-`
 
-const Welcome = styled.div`
+
+const Welcome = styled.div
   @keyframes welcome-fade-in {
     from {
       opacity: 0;
@@ -102,7 +101,7 @@ const Welcome = styled.div`
       padding: 40px;
     }
   }
-`
+
 
 export function WelcomeBanner() {
   const wallet = useWallet()
