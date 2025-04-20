@@ -41,7 +41,7 @@ const Buttons = styled.div`
 
 const Welcome = styled.div`
   /* Použitie obrázka ako pozadia bez animácií a efektov */
-  background: url('/welcome_background.png') no-repeat center center/cover;
+  background: linear-gradient(-45deg, #a1e100, #91d900, #80c700, #6bcf38, #53b733);
   border-radius: 10px;
   position: relative;
   overflow: hidden;
