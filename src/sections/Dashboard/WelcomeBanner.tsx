@@ -41,7 +41,7 @@ const Buttons = styled.div`
 
 const Welcome = styled.div`
   /* Použitie obrázka ako pozadia bez animácií a efektov */
-  background: url('/welcome_background.png');
+  background: url'/welcome_background.png') no-repeat center center/cover;
   border-radius: 10px;
   position: relative;
   overflow: hidden;
@@ -56,6 +56,19 @@ const Welcome = styled.div`
     height: 100px;
     top: 0;
     right: 0;
+  }
+
+  & > div {
+    padding: 0px;
+  }
+
+  @media (min-width: 800px) {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    padding: 0;
+    & > div {
+      padding: 40px;
+    }
   }
 `
 
