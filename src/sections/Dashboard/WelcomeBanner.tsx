@@ -61,8 +61,8 @@ const Welcome = styled.div`
     }
   }
 
-  /* Limetkový gradient */
-  background: linear-gradient(-45deg, #c0ff33, #99e600, #66cc00, #4dba00);
+  /* Gradient z #a3fb1e do #7eff73 */
+  background: linear-gradient(-45deg, #a3fb1e, #7eff73);
   background-size: 300% 300%;
   animation: welcome-fade-in .5s ease, backgroundGradient 30s ease infinite;
   border-radius: 10px;
