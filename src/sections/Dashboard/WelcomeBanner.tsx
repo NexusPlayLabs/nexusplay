@@ -62,7 +62,7 @@ const Welcome = styled.div`
   }
 
   /* Gradient s limetkovými odtieňmi a tmavou zelenou */
-  background: linear-gradient(-45deg, #66cc33, #ff3e88, #2969ff, #ef3cff, #ff3c87);
+  background: linear-gradient(-45deg, #a1e100, #91d900, #80c700, #6bcf38, #53b733);
   background-size: 300% 300%;
   animation: welcome-fade-in .5s ease, backgroundGradient 30s ease infinite;
   border-radius: 10px;
