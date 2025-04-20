@@ -40,7 +40,7 @@ const StyledHeader = styled.div`
 `
 
 const Logo = styled(NavLink)`
-  height: 50px;
+  height: 65px;
   margin: 0 10px;
   & > img {
     height: 100%;
