@@ -4,7 +4,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useUserStore } from '../../hooks/useUserStore'
 
-const Buttons = styled.div
+const Buttons = styled.div`
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -37,9 +37,9 @@ const Buttons = styled.div
       background: white;
     }
   }
+`
 
-
-const Welcome = styled.div
+const Welcome = styled.div`
   @keyframes welcome-fade-in {
     from {
       opacity: 0;
@@ -99,7 +99,7 @@ const Welcome = styled.div
       padding: 40px;
     }
   }
-
+`
 
 export function WelcomeBanner() {
   const wallet = useWallet()
@@ -115,7 +115,7 @@ export function WelcomeBanner() {
   return (
     <Welcome>
       <div>
-        <h1>Welcome to NexusPlay Beta 👋</h1>
+        <h1>Welcome to NexusPlay Beta1 👋</h1>
         <p>
           A fair, simple and decentralized casino on Solana.
         </p>
@@ -124,8 +124,8 @@ export function WelcomeBanner() {
         <button onClick={copyInvite}>
           💸 Copy Invite
         </button>
-        <button onClick={() => window.open('https://t.me/nexusplay_labs', '_blank')}>
-          💬 Telegram
+        <button onClick={() => window.open('https://t.me/nexusplay_labs')}>
+          🚀 Telegram
         </button>
         <button onClick={() => window.open('https://discord.gg/HSTtFFwR', '_blank')}>
           💬 Discord
