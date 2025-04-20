@@ -1,138 +1,236 @@
-import { useWallet } from '@solana/wallet-adapter-react'
-import { useWalletModal } from '@solana/wallet-adapter-react-ui'
+import { GambaUi, TokenValue, useCurrentPool, useGambaPlatformContext, useUserBalance } from 'gamba-react-ui-v2'
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
-import { useUserStore } from '../../hooks/useUserStore'
+import { Modal } from '../components/Modal'
+import { PLATFORM_JACKPOT_FEE } from '../constants'
+import TokenSelect from './TokenSelect'
+import { UserButton } from './UserButton'
 
-const Buttons = styled.div
-  overflow: hidden;
+const Bonus = styled.button
+  all: unset;
+  cursor: pointer;
+  color: #003c00;
+  border-radius: 10px;
+  background: #03ffa4;
+  padding: 2px 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: background-color .2s;
+  &:hover {
+    background: white;
+  }
+
+
+const StyledHeader = styled.div
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-  gap: 10px;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+  background: rgba(33, 34, 51, 0.9);
+  position: fixed;
+  background: #000000CC;
+  backdrop-filter: blur(20px);
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  backdrop-filter: blur(20px);
 
-  @media (min-width: 800px) {
+
+const Logo = styled(NavLink)
+  height: 35px;
+  margin: 0 10px;
+  & > img {
     height: 100%;
   }
 
-  @media (max-width: 800px) {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    padding-top: 0!important;
-  }
 
-  & > button {
-    border: none;
-    width: 100%; /* Tlačidlám sa priradí šírka 100% */
-    max-width: 200px; /* Zabezpečí, že tlačidlá nebudú príliš široké na veľkých obrazovkách */
-    border-radius: 10px;
-    padding: 10px;
-    background: #ffffffdf;
-    transition: background-color .2s ease;
-    color: black;
-    cursor: pointer;
-    &:hover {
-      background: white;
-    }
-  }
-
-
-const Welcome = styled.div
-  @keyframes welcome-fade-in {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes backgroundGradient {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-
-  /* Gradient z #a3fb1e do #7eff73 */
-  background: linear-gradient(-45deg, #66cc33, #ff3e88, #2969ff, #ef3cff, #ff3c87);
-  background-size: 300% 300%;
-  animation: welcome-fade-in .5s ease, backgroundGradient 30s ease infinite;
-  border-radius: 10px;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 20px;
-  filter: drop-shadow(0 4px 3px rgba(0,0,0,.07)) drop-shadow(0 2px 2px rgba(0,0,0,.06));
-
-  & img {
-    animation-duration: 5s;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
-    width: 100px;
-    height: 100px;
-    top: 0;
-    right: 0;
-    &:nth-child(1) {animation-delay: 0s;}
-    &:nth-child(2) {animation-delay: 1s;}
-  }
-
-  & > div {
-    padding: 0px;
-    filter: drop-shadow(0 4px 3px rgba(0,0,0,.07)) drop-shadow(0 2px 2px rgba(0,0,0,.06));
-  }
-
-  @media (min-width: 800px) {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    padding: 0;
-    & > div {
-      padding: 40px;
-    }
-  }
-
-
-export function WelcomeBanner() {
-  const wallet = useWallet()
-  const walletModal = useWalletModal()
-  const store = useUserStore()
-  const copyInvite = () => {
-    store.set({ userModal: true })
-    if (!wallet.connected) {
-      walletModal.setVisible(true)
-    }
-  }
+export default function Header() {
+  const pool = useCurrentPool()
+  const context = useGambaPlatformContext()
+  const balance = useUserBalance()
+  const [bonusHelp, setBonusHelp] = React.useState(false)
+  const [jackpotHelp, setJackpotHelp] = React.useState(false)
 
   return (
-    <Welcome>
-      <div>
-        <h1>Welcome to NexusPlay Beta 👋</h1>
-        <p>
-          A fair, simple and decentralized casino on Solana.
-        </p>
-      </div>
-      <Buttons>
-        <button onClick={copyInvite}>
-          💸 Copy Invite
-        </button>
-        <button onClick={() => window.open('https://t.me/nexusplay_labs', '_blank')}>
-          💬 Telegram
-        </button>
-        <button onClick={() => window.open('https://discord.gg/HSTtFFwR', '_blank')}>
-          💬 Discord
-        </button>
-      </Buttons>
-    </Welcome>
+    <>
+      {bonusHelp && (
+        <Modal onClose={() => setBonusHelp(false)}>
+          <h1>Bonus ✨</h1>
+          <p>
+            You have <b><TokenValue amount={balance.bonusBalance} /></b> worth of free plays. This bonus will be applied automatically when you play.
+          </p>
+          <p>
+            Note that a fee is still needed from your wallet for each play.
+          </p>
+        </Modal>
+      )}
+      {jackpotHelp && (
+        <Modal onClose={() => setJackpotHelp(false)}>
+          <h1>Jackpot 💰</h1>
+          <p style={{ fontWeight: 'bold' }}>
+            There{'\''}s <TokenValue amount={pool.jackpotBalance} /> in the Jackpot.
+          </p>
+          <p>
+            The Jackpot is a prize pool that grows with every bet made. As the Jackpot grows, so does your chance of winning. Once a winner is selected, the value of the Jackpot resets and grows from there until a new winner is selected.
+          </p>
+          <p>
+            You will be paying a maximum of {(PLATFORM_JACKPOT_FEE * 100).toLocaleString(undefined, { maximumFractionDigits: 4 })}% for each wager for a chance to win.
+          </p>
+          <label style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            {context.defaultJackpotFee === 0 ? 'DISABLED' : 'ENABLED'}
+            <GambaUi.Switch
+              checked={context.defaultJackpotFee > 0}
+              onChange={(checked) => context.setDefaultJackpotFee(checked ? PLATFORM_JACKPOT_FEE : 0)}
+            />
+          </label>
+        </Modal>
+      )}
+      <StyledHeader>
+        <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+          <Logo to="/">
+            <img alt="Gamba logo" src="/logo.svg" />
+          </Logo>
+        </div>
+        <div style={{ display: 'flex', gap: '10px', alignItems: 'center', position: 'relative' }}>
+          {pool.jackpotBalance > 0 && (
+            <Bonus onClick={() => setJackpotHelp(true)}>
+              💰 <TokenValue amount={pool.jackpotBalance} />
+            </Bonus>
+          )}
+          {balance.bonusBalance > 0 && (
+            <Bonus onClick={() => setBonusHelp(true)}>
+              ✨ <TokenValue amount={balance.bonusBalance} />
+            </Bonus>
+          )}
+          <TokenSelect />
+          <UserButton />
+        </div>
+      </StyledHeader>
+    </>
+  )
+}
+
+
+preco to moje logo sa v mobile neprisposobi ale posunie celu stranku ?
+import { GambaUi, TokenValue, useCurrentPool, useGambaPlatformContext, useUserBalance } from 'gamba-react-ui-v2'
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import styled from 'styled-components'
+import { Modal } from '../components/Modal'
+import { PLATFORM_JACKPOT_FEE } from '../constants'
+import TokenSelect from './TokenSelect'
+import { UserButton } from './UserButton'
+
+const Bonus = styled.button
+  all: unset;
+  cursor: pointer;
+  color: #003c00;
+  border-radius: 10px;
+  background: #03ffa4;
+  padding: 2px 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: background-color .2s;
+  &:hover {
+    background: white;
+  }
+
+
+const StyledHeader = styled.div
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+  background: rgba(33, 34, 51, 0.9);
+  position: fixed;
+  background: #000000CC;
+  backdrop-filter: blur(20px);
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  backdrop-filter: blur(20px);
+
+
+const Logo = styled(NavLink)`
+  height: auto;
+  width: 100%;
+  max-width: 200px; /* Maximálna šírka loga, ktorá zabezpečí, že logo bude mať rozumnú veľkosť aj na väčších obrazovkách */
+  margin: 0 10px;
+  
+  & > img {
+    width: 100%;
+    height: auto;
+  }
+`
+
+
+export default function Header() {
+  const pool = useCurrentPool()
+  const context = useGambaPlatformContext()
+  const balance = useUserBalance()
+  const [bonusHelp, setBonusHelp] = React.useState(false)
+  const [jackpotHelp, setJackpotHelp] = React.useState(false)
+
+  return (
+    <>
+      {bonusHelp && (
+        <Modal onClose={() => setBonusHelp(false)}>
+          <h1>Bonus ✨</h1>
+          <p>
+            You have <b><TokenValue amount={balance.bonusBalance} /></b> worth of free plays. This bonus will be applied automatically when you play.
+          </p>
+          <p>
+            Note that a fee is still needed from your wallet for each play.
+          </p>
+        </Modal>
+      )}
+      {jackpotHelp && (
+        <Modal onClose={() => setJackpotHelp(false)}>
+          <h1>Jackpot 💰</h1>
+          <p style={{ fontWeight: 'bold' }}>
+            There{'\''}s <TokenValue amount={pool.jackpotBalance} /> in the Jackpot.
+          </p>
+          <p>
+            The Jackpot is a prize pool that grows with every bet made. As the Jackpot grows, so does your chance of winning. Once a winner is selected, the value of the Jackpot resets and grows from there until a new winner is selected.
+          </p>
+          <p>
+            You will be paying a maximum of {(PLATFORM_JACKPOT_FEE * 100).toLocaleString(undefined, { maximumFractionDigits: 4 })}% for each wager for a chance to win.
+          </p>
+          <label style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            {context.defaultJackpotFee === 0 ? 'DISABLED' : 'ENABLED'}
+            <GambaUi.Switch
+              checked={context.defaultJackpotFee > 0}
+              onChange={(checked) => context.setDefaultJackpotFee(checked ? PLATFORM_JACKPOT_FEE : 0)}
+            />
+          </label>
+        </Modal>
+      )}
+      <StyledHeader>
+        <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+          <Logo to="/">
+            <img alt="NexusPlay logo" src="/logo_casino.png" />
+          </Logo>
+        </div>
+        <div style={{ display: 'flex', gap: '10px', alignItems: 'center', position: 'relative' }}>
+          {pool.jackpotBalance > 0 && (
+            <Bonus onClick={() => setJackpotHelp(true)}>
+              💰 <TokenValue amount={pool.jackpotBalance} />
+            </Bonus>
+          )}
+          {balance.bonusBalance > 0 && (
+            <Bonus onClick={() => setBonusHelp(true)}>
+              ✨ <TokenValue amount={balance.bonusBalance} />
+            </Bonus>
+          )}
+          <TokenSelect />
+          <UserButton />
+        </div>
+      </StyledHeader>
+    </>
   )
 }
