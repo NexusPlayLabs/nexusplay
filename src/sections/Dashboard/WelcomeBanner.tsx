@@ -40,7 +40,7 @@ const Buttons = styled.div`
 const Welcome = styled.div`
   position: relative;
   width: 100%;
-  max-height: 400px;
+  max-height: 450px;
   overflow: hidden;
   display: flex;
   align-items: flex-start;
