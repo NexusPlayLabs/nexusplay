@@ -40,12 +40,11 @@ const Buttons = styled.div`
 const Welcome = styled.div`
   position: relative;
   width: 100%;
-  max-height: 450px;
+  max-height: 500px;
   overflow: hidden;
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  margin-top: -30px; 
    
   img {
     width: 100%;
