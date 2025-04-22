@@ -45,7 +45,7 @@ const Welcome = styled.div`
   min-height: 100vh;
   overflow: hidden;
   display: flex;
-  align-items: center;
+  align-items: flex-start; // zmena tu
   justify-content: center;
 
   img {
