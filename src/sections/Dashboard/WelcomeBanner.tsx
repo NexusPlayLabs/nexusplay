@@ -4,7 +4,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { useUserStore } from '../../hooks/useUserStore'
 
-import { Tag, Send, MessageCircle } from 'lucide-react'
+// IKONY
+import { Gift, Send, MessageCircle } from 'lucide-react'
 
 const Buttons = styled.div`
   display: flex;
@@ -16,30 +17,33 @@ const Buttons = styled.div`
   & > button {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
+
     border: none;
-    border-radius: 9999px;
-    padding: 8px 16px;
+    border-radius: 12px;
+    padding: 10px 16px;
     font-size: 14px;
-    background: linear-gradient(145deg, #c8ffc8, #e6ffe6);
-    color: #1e1e1e;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.9);
+    color: #000;
     cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.2s ease;
+    white-space: nowrap;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 
     &:hover {
-      background: #ffffff;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      background: #fff;
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 600px) {
+      padding: 8px 12px;
+      font-size: 13px;
     }
 
     svg {
       width: 16px;
       height: 16px;
-    }
-
-    @media (max-width: 600px) {
-      padding: 6px 12px;
-      font-size: 13px;
     }
   }
 `
@@ -48,7 +52,7 @@ const Welcome = styled.div`
   position: relative;
   width: 100%;
   height: auto;
-  max-height: 500px;
+  max-height: 480px;
   overflow: hidden;
   display: flex;
   align-items: flex-start;
@@ -70,7 +74,6 @@ const Overlay = styled.div`
   padding: 20px;
   display: flex;
   justify-content: center;
-  gap: 10px;
   box-sizing: border-box;
   flex-wrap: wrap;
 `
@@ -93,7 +96,7 @@ export function WelcomeBanner() {
       <Overlay>
         <Buttons>
           <button onClick={copyInvite}>
-            <Tag /> Copy Invite
+            <Gift /> Copy Invite
           </button>
           <button onClick={() => window.open('https://t.me/nexusplay_labs')}>
             <Send /> Telegram
