@@ -57,7 +57,7 @@ const Welcome = styled.div`
   align-items: flex-start;
   justify-content: center;
 
- img {
+img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -65,9 +65,8 @@ const Welcome = styled.div`
   display: block;
 
   @media (max-width: 600px) {
-    object-fit: cover; /* viac zoomnuté */
-    object-position: center center; /* zameranie na stred */
-     transform: scale(0.98);
+    transform: scale(0.9); /* odzoom */
+    transform-origin: center center;
   }
 }
 `
