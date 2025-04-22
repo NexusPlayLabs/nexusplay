@@ -86,6 +86,10 @@ const Overlay = styled.div`
   justify-content: center;
   box-sizing: border-box;
   flex-wrap: wrap;
+
+  @media (max-width: 600px) {
+    bottom: 40px; /* posunie tlačidlá vyššie na mobile */
+  }
 `
 
 export function WelcomeBanner() {
