@@ -77,7 +77,7 @@ const Welcome = styled.div`
 
 const Overlay = styled.div`
   position: absolute;
-  bottom: 0;
+  bottom: 40px; /* vždy 40px od spodku na mobile */
   left: 0;
   z-index: 2;
   width: 100%;
@@ -87,8 +87,8 @@ const Overlay = styled.div`
   box-sizing: border-box;
   flex-wrap: wrap;
 
-  @media (max-width: 600px) {
-    bottom: 40px; /* posunie tlačidlá vyššie na mobile */
+  @media (min-width: 601px) {
+    bottom: 0; /* na väčších obrazovkách sa drží pri spodku obrázka */
   }
 `
 
