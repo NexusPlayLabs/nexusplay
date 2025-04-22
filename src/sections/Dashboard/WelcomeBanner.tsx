@@ -36,19 +36,16 @@ const Buttons = styled.div`
     @media (max-width: 600px) {
       padding: 6px 10px;
       font-size: 13px;
-      min-width: 110px;
-      max-width: 140px;
-      flex: 1 1 auto;
+      min-width: auto;
+      max-width: 100px;
+      flex: 1 1 0;
     }
   }
 
-     @media (max-width: 600px) {
-      padding: 5px 8px;
-      font-size: 12px;
-      min-width: 90px;
-      max-width: 120px;
-      flex: 1 1 auto;
-    }
+  @media (max-width: 600px) {
+    gap: 8px;
+    justify-content: center;
+  }
 `
 
 const Welcome = styled.div`
