@@ -50,7 +50,7 @@ const Welcome = styled.div`
     width: 100%;
     height: auto;
     object-fit: cover;
-    object-position: center 30%;
+    object-position: center -30%;
   }
 `
 
