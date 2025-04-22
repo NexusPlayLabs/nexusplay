@@ -40,26 +40,36 @@ const Buttons = styled.div`
 `
 
 const Welcome = styled.div`
-  background-image: url('/welcome_background.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  min-height: 500px;
-  border-radius: 10px;
   position: relative;
+  width: 100%;
+  min-height: 100vh;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  padding: 20px;
 
-  & > div {
-    display: none; // Skryje textový blok
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
+`
+
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
 
   @media (min-width: 800px) {
-    display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding: 40px;
@@ -70,6 +80,7 @@ export function WelcomeBanner() {
   const wallet = useWallet()
   const walletModal = useWalletModal()
   const store = useUserStore()
+
   const copyInvite = () => {
     store.set({ userModal: true })
     if (!wallet.connected) {
@@ -79,23 +90,21 @@ export function WelcomeBanner() {
 
   return (
     <Welcome>
-      <div>
-        <h1>Welcome to NexusPlay Beta1 👋</h1>
-        <p>
-          A fair, simple and decentralized casino on Solana.
-        </p>
-      </div>
-      <Buttons>
-        <button onClick={copyInvite}>
-          💸 Copy Invite
-        </button>
-        <button onClick={() => window.open('https://t.me/nexusplay_labs')}>
-          🚀 Telegram
-        </button>
-        <button onClick={() => window.open('https://discord.gg/HSTtFFwR', '_blank')}>
-          💬 Discord
-        </button>
-      </Buttons>
+      <img src="/welcome_backgorund.png" alt="Welcome background" />
+      <Overlay>
+        <Buttons>
+          <button onClick={copyInvite}>
+            💸 Copy Invite
+          </button>
+          <button onClick={() => window.open('https://t.me/nexusplay_labs')}>
+            🚀 Telegram
+          </button>
+          <button onClick={() => window.open('https://discord.gg/HSTtFFwR', '_blank')}>
+            💬 Discord
+          </button>
+        </Buttons>
+      </Overlay>
     </Welcome>
   )
+}
 }
