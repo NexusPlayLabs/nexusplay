@@ -65,8 +65,8 @@ img {
   display: block;
 
   @media (max-width: 600px) {
-    transform: scale(0.9); /* odzoom */
-    transform-origin: center center;
+    object-fit: cover; /* viac zoomnuté */
+    object-position: center center; /* zameranie na stred */
   }
 }
 `
