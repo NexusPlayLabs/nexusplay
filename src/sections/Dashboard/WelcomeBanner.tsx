@@ -61,7 +61,7 @@ const Welcome = styled.div`
     align-items: center; /* odstráni medzeru hore */
   }
 
-  img {
+    img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -70,6 +70,7 @@ const Welcome = styled.div`
 
     @media (max-width: 600px) {
       object-fit: contain;
+      transform: scale(1.05); /* trošku priblíži obrázok */
     }
   }
 `
