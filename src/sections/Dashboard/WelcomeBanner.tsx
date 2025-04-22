@@ -42,10 +42,13 @@ const Buttons = styled.div`
     }
   }
 
-  @media (max-width: 600px) {
-    gap: 8px;
-    justify-content: center;
-  }
+     @media (max-width: 600px) {
+      padding: 5px 8px;
+      font-size: 12px;
+      min-width: 90px;
+      max-width: 120px;
+      flex: 1 1 auto;
+    }
 `
 
 const Welcome = styled.div`
