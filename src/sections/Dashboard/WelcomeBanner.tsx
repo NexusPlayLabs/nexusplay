@@ -34,11 +34,17 @@ const Buttons = styled.div`
     }
 
     @media (max-width: 600px) {
-      width: 100%;
-      max-width: 160px; /* stredne široké */
-      padding: 8px 12px;
-      font-size: 14px;
+      padding: 6px 10px;
+      font-size: 13px;
+      min-width: 110px;
+      max-width: 140px;
+      flex: 1 1 auto;
     }
+  }
+
+  @media (max-width: 600px) {
+    gap: 8px;
+    justify-content: center;
   }
 `
 
