@@ -43,6 +43,8 @@ const Welcome = styled.div`
   background-image: url('/nexusplay_welcome_background.png');
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
+  min-height: 500px;
   border-radius: 10px;
   position: relative;
   overflow: hidden;
@@ -52,26 +54,18 @@ const Welcome = styled.div`
   flex-direction: column;
   padding: 20px;
 
-  & img {
-    width: 100px;
-    height: 100px;
-    top: 0;
-    right: 0;
-  }
-
   & > div {
-    padding: 0px;
+    display: none; // Skryje textový blok
   }
 
   @media (min-width: 800px) {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    padding: 0;
-    & > div {
-      padding: 40px;
-    }
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 40px;
   }
 `
+
 
 export function WelcomeBanner() {
   const wallet = useWallet()
