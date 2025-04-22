@@ -14,19 +14,19 @@ const Buttons = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
 
     background: rgba(255, 255, 255, 0.85);
     border: 2px solid transparent;
-    border-radius: 12px;
-    padding: 10px 16px;
-    font-size: 15px;
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-size: 14px;
     font-weight: 500;
     color: #111;
     cursor: pointer;
     transition: all 0.2s ease;
-    min-width: 140px;
-    max-width: 200px;
+    min-width: 130px;
+    max-width: 180px;
 
     &:hover {
       background: white;
@@ -34,16 +34,16 @@ const Buttons = styled.div`
     }
 
     @media (max-width: 600px) {
-      padding: 6px 10px;
-      font-size: 13px;
-      min-width: auto;
+      padding: 4px 8px;
+      font-size: 11px;
+      min-width: 90px;
       max-width: 100px;
       flex: 1 1 0;
     }
   }
 
   @media (max-width: 600px) {
-    gap: 8px;
+    gap: 6px;
     justify-content: center;
   }
 `
