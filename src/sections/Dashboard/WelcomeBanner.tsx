@@ -4,40 +4,51 @@ import React from 'react'
 import styled from 'styled-components'
 import { useUserStore } from '../../hooks/useUserStore'
 
-const Buttons = styled.div
+import { Tag, Send, MessageCircle } from 'lucide-react'
+
+const Buttons = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
 
   & > button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
     border: none;
-    border-radius: 10px;
-    padding: 8px 12px;
+    border-radius: 9999px;
+    padding: 8px 16px;
     font-size: 14px;
-    background: #ffffffdf;
-    color: black;
+    background: linear-gradient(145deg, #c8ffc8, #e6ffe6);
+    color: #1e1e1e;
     cursor: pointer;
-    white-space: nowrap;
-    transition: background-color 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
 
     &:hover {
-      background: white;
+      background: #ffffff;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    svg {
+      width: 16px;
+      height: 16px;
     }
 
     @media (max-width: 600px) {
-      padding: 6px 10px;
+      padding: 6px 12px;
       font-size: 13px;
     }
   }
+`
 
-
-const Welcome = styled.div
+const Welcome = styled.div`
   position: relative;
   width: 100%;
   height: auto;
-  max-height: 600px; // alebo výšku, ktorú chceš
+  max-height: 500px;
   overflow: hidden;
   display: flex;
   align-items: flex-start;
@@ -46,11 +57,11 @@ const Welcome = styled.div
   img {
     width: 100%;
     height: auto;
-    object-fit: cover; // alebo "contain" ak chceš celé proporcie
+    object-fit: cover;
   }
+`
 
-
-const Overlay = styled.div
+const Overlay = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
@@ -62,7 +73,7 @@ const Overlay = styled.div
   gap: 10px;
   box-sizing: border-box;
   flex-wrap: wrap;
-
+`
 
 export function WelcomeBanner() {
   const wallet = useWallet()
@@ -82,13 +93,13 @@ export function WelcomeBanner() {
       <Overlay>
         <Buttons>
           <button onClick={copyInvite}>
-            💸 Copy Invite
+            <Tag /> Copy Invite
           </button>
           <button onClick={() => window.open('https://t.me/nexusplay_labs')}>
-            🚀 Telegram
+            <Send /> Telegram
           </button>
           <button onClick={() => window.open('https://discord.gg/HSTtFFwR', '_blank')}>
-            💬 Discord
+            <MessageCircle /> Discord
           </button>
         </Buttons>
       </Overlay>
