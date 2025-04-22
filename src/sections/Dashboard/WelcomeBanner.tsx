@@ -40,7 +40,7 @@ const Buttons = styled.div`
 const Welcome = styled.div`
   position: relative;
   width: 100%;
-  max-height: 500px;
+  max-height: 450px;
   overflow: hidden;
   display: flex;
   align-items: flex-start;
@@ -50,6 +50,7 @@ const Welcome = styled.div`
     width: 100%;
     height: auto;
     object-fit: cover;
+    object-position: center top;
   }
 `
 
