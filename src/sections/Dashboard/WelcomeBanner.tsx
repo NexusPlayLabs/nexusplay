@@ -57,18 +57,17 @@ const Welcome = styled.div`
   align-items: flex-start;
   justify-content: center;
 
-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
+ img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
 
-  @media (max-width: 600px) {
-    object-fit: cover; /* viac zoomnuté */
-    object-position: center center; /* zameranie na stred */
+    @media (max-width: 600px) {
+      object-fit: contain;
+    }
   }
-}
 `
 
 const Overlay = styled.div`
