@@ -4,7 +4,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useUserStore } from '../../hooks/useUserStore'
 
-const Buttons = styled.div`
+const Buttons = styled.div
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -31,29 +31,26 @@ const Buttons = styled.div`
       font-size: 13px;
     }
   }
-`
 
-const Welcome = styled.div`
+
+const Welcome = styled.div
   position: relative;
   width: 100%;
-  height: 300px; // výška, ktorú chceš – pokojne uprav podľa potreby
+  height: auto;
+  max-height: 600px; // alebo výšku, ktorú chceš
   overflow: hidden;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 
   img {
     width: 100%;
-    height: 100%;
-    object-fit: cover; // alebo contain, ale cover je vizuálne čistejší
+    height: auto;
+    object-fit: cover; // alebo "contain" ak chceš celé proporcie
   }
 
-  @media (max-width: 600px) {
-    height: 250px; // menšia výška pre mobil, ak chceš
-  }
-`
 
-const Overlay = styled.div`
+const Overlay = styled.div
   position: absolute;
   bottom: 0;
   left: 0;
@@ -65,7 +62,7 @@ const Overlay = styled.div`
   gap: 10px;
   box-sizing: border-box;
   flex-wrap: wrap;
-`
+
 
 export function WelcomeBanner() {
   const wallet = useWallet()
