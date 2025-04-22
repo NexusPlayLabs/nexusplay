@@ -40,7 +40,6 @@ const Buttons = styled.div`
 const Welcome = styled.div`
   position: relative;
   width: 100%;
-  max-height: 450px;
   overflow: hidden;
   display: flex;
   align-items: flex-start;
@@ -48,10 +47,10 @@ const Welcome = styled.div`
 
   img {
     width: 100%;
-    height: 100%;
-    object-fit: contain; /* zobrazí celý obrázok */
-    object-position: top center; /* zarovná ho k vrchu */
-    display: block; /* odstráni prípadné spodné medzery */
+    height: auto;
+    object-fit: contain;
+    object-position: top center;
+    display: block;
   }
 `
 
