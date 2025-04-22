@@ -40,32 +40,38 @@ const Buttons = styled.div`
 `
 
 const Welcome = styled.div`
-  background-image: url('/welcome_background.png');
-  background-size: contain;
-  background-repeat: no-repeat;
+  background-image: url('/nexusplay_welcome_background.png');
+  background-size: cover;
   background-position: center;
-  width: 100%;
-  min-height: 100vh; // výška okna zariadenia
   border-radius: 10px;
+  position: relative;
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  flex-direction: column;
   padding: 20px;
-  box-sizing: border-box;
+
+  & img {
+    width: 100px;
+    height: 100px;
+    top: 0;
+    right: 0;
+  }
 
   & > div {
-    display: none;
+    padding: 0px;
   }
 
   @media (min-width: 800px) {
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 40px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    padding: 0;
+    & > div {
+      padding: 40px;
+    }
   }
 `
-
-
 
 export function WelcomeBanner() {
   const wallet = useWallet()
