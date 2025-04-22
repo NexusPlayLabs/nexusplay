@@ -40,7 +40,7 @@ const Buttons = styled.div`
 `
 
 const Welcome = styled.div`
-  background-image: url('/welcome_background_final.png');
+  background-image: url('/welcome_background.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
