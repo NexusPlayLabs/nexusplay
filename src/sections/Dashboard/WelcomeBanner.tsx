@@ -13,6 +13,7 @@ const Buttons = styled.div`
   & > button {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
 
     background: rgba(255, 255, 255, 0.85);
@@ -24,6 +25,8 @@ const Buttons = styled.div`
     color: #111;
     cursor: pointer;
     transition: all 0.2s ease;
+    min-width: 140px;
+    max-width: 200px;
 
     &:hover {
       background: white;
@@ -31,8 +34,10 @@ const Buttons = styled.div`
     }
 
     @media (max-width: 600px) {
+      width: 100%;
+      max-width: 160px; /* stredne široké */
+      padding: 8px 12px;
       font-size: 14px;
-      padding: 8px 14px;
     }
   }
 `
@@ -47,15 +52,18 @@ const Welcome = styled.div`
   justify-content: center;
 
   img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: center top;
     display: block;
+  }
 
-    @media (max-width: 600px) {
-      object-fit: contain;
-    }
+  @media (max-width: 600px) {
+    height: 300px; // mobilná výška, uprav podľa potreby
   }
 `
 
