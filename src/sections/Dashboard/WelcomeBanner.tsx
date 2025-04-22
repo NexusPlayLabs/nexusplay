@@ -52,18 +52,15 @@ const Welcome = styled.div`
   justify-content: center;
 
   img {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center top;
+    object-position: center;
     display: block;
-  }
 
-  @media (max-width: 600px) {
-    height: 300px; // mobilná výška, uprav podľa potreby
+    @media (max-width: 600px) {
+      object-fit: contain;
+    }
   }
 `
 
