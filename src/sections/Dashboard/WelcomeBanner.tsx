@@ -40,6 +40,7 @@ const Buttons = styled.div`
 const Welcome = styled.div`
   position: relative;
   width: 100%;
+  height: 400px; // nastavíš si výšku ako potrebuješ
   overflow: hidden;
   display: flex;
   align-items: flex-start;
@@ -47,9 +48,9 @@ const Welcome = styled.div`
 
   img {
     width: 100%;
-    height: auto;
-    object-fit: contain;
-    object-position: top center;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
     display: block;
   }
 `
