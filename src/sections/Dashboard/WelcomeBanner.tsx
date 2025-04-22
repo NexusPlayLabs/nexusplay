@@ -5,34 +5,20 @@ import styled from 'styled-components'
 import { useUserStore } from '../../hooks/useUserStore'
 
 const Buttons = styled.div`
-  overflow: hidden;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: row;
   gap: 10px;
-
-  @media (min-width: 800px) {
-    height: 100%;
-  }
-
-  @media (max-width: 800px) {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    padding-top: 0!important;
-  }
 
   & > button {
     border: none;
-    width: 100%;
     border-radius: 10px;
-    padding: 10px;
+    padding: 10px 15px;
     background: #ffffffdf;
-    transition: background-color .2s ease;
     color: black;
     cursor: pointer;
+    white-space: nowrap;
+    transition: background-color .2s ease;
+
     &:hover {
       background: white;
     }
@@ -42,38 +28,32 @@ const Buttons = styled.div`
 const Welcome = styled.div`
   position: relative;
   width: 100%;
-  min-height: 100vh;
+  height: auto;
+  max-height: 600px; // alebo výšku, ktorú chceš
   overflow: hidden;
   display: flex;
-  align-items: flex-start; // zmena tu
+  align-items: flex-start;
   justify-content: center;
 
   img {
     width: 100%;
-    height: 100%;
-    object-fit: contain;
+    height: auto;
+    object-fit: cover; // alebo "contain" ak chceš celé proporcie
   }
 `
 
 const Overlay = styled.div`
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
   z-index: 2;
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
   padding: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
   box-sizing: border-box;
-
-  @media (min-width: 800px) {
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 40px;
-  }
+  flex-wrap: wrap;
 `
 
 export function WelcomeBanner() {
