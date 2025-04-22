@@ -67,6 +67,7 @@ const Welcome = styled.div`
   @media (max-width: 600px) {
     object-fit: cover; /* viac zoomnuté */
     object-position: center center; /* zameranie na stred */
+     transform: scale(0.98);
   }
 }
 `
