@@ -77,7 +77,7 @@ const Welcome = styled.div`
 
 const Overlay = styled.div`
   position: absolute;
-  bottom: 40px; /* vždy 40px od spodku na mobile */
+  bottom: 55px; /* vždy 40px od spodku na mobile */
   left: 0;
   z-index: 2;
   width: 100%;
