@@ -7,20 +7,28 @@ import { useUserStore } from '../../hooks/useUserStore'
 const Buttons = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 10px;
 
   & > button {
     border: none;
     border-radius: 10px;
-    padding: 10px 15px;
+    padding: 8px 12px;
+    font-size: 14px;
     background: #ffffffdf;
     color: black;
     cursor: pointer;
     white-space: nowrap;
-    transition: background-color .2s ease;
+    transition: background-color 0.2s ease;
 
     &:hover {
       background: white;
+    }
+
+    @media (max-width: 600px) {
+      padding: 6px 10px;
+      font-size: 13px;
     }
   }
 `
