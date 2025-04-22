@@ -40,8 +40,9 @@ const Buttons = styled.div`
 `
 
 const Welcome = styled.div`
-  /* Použitie obrázka ako pozadia bez animácií a efektov */
-  background: linear-gradient(-45deg, #a1e100, #91d900, #80c700, #6bcf38, #53b733);
+  background-image: url('/nexusplay_welcome_background.png');
+  background-size: cover;
+  background-position: center;
   border-radius: 10px;
   position: relative;
   overflow: hidden;
