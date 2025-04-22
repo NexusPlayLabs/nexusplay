@@ -45,7 +45,8 @@ const Welcome = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: center;
-
+  margin-top: -30px; 
+   
   img {
     width: 100%;
     height: auto;
