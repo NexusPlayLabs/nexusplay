@@ -36,17 +36,20 @@ const Buttons = styled.div`
 const Welcome = styled.div`
   position: relative;
   width: 100%;
-  height: auto;
-  max-height: 600px; // alebo výšku, ktorú chceš
+  height: 300px; // výška, ktorú chceš – pokojne uprav podľa potreby
   overflow: hidden;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
 
   img {
     width: 100%;
-    height: auto;
-    object-fit: cover; // alebo "contain" ak chceš celé proporcie
+    height: 100%;
+    object-fit: cover; // alebo contain, ale cover je vizuálne čistejší
+  }
+
+  @media (max-width: 600px) {
+    height: 250px; // menšia výška pre mobil, ak chceš
   }
 `
 
