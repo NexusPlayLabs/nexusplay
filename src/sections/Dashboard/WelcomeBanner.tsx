@@ -40,31 +40,31 @@ const Buttons = styled.div`
 `
 
 const Welcome = styled.div`
-  background-image: url('/nexusplay_welcome_background.png');
-  background-size: cover;
-  background-position: center;
+  background-image: url('/welcome_background.png');
+  background-size: contain;
   background-repeat: no-repeat;
-  min-height: 500px;
+  background-position: center;
+  width: 100%;
+  min-height: 100vh; // výška okna zariadenia
   border-radius: 10px;
-  position: relative;
-  overflow: hidden;
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 20px;
+  box-sizing: border-box;
 
   & > div {
-    display: none; // Skryje textový blok
+    display: none;
   }
 
   @media (min-width: 800px) {
-    display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding: 40px;
   }
 `
+
 
 
 export function WelcomeBanner() {
