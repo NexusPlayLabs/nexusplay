@@ -45,12 +45,13 @@ const Welcome = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: center;
-   
+
   img {
     width: 100%;
-    height: auto;
-    object-fit: cover;
-    object-position: center -30%;
+    height: 100%;
+    object-fit: contain; /* zobrazí celý obrázok */
+    object-position: top center; /* zarovná ho k vrchu */
+    display: block; /* odstráni prípadné spodné medzery */
   }
 `
 
