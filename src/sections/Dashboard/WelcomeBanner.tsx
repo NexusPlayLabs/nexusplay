@@ -61,7 +61,6 @@ const Welcome = styled.div`
     height: auto;           /* dôležité! výška podľa obrázka */
     align-items: center;    /* centrovanie obsahu vertikálne */
     padding-top: 10;
-    margin-top: 0;
   }
 
   img {
