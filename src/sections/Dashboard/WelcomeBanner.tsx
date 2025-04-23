@@ -62,17 +62,17 @@ const Welcome = styled.div`
   }
 
     img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-    border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: 20px;
 
   @media (max-width: 600px) {
-    object-fit: cover;
-    object-position: center;
-    height: 100%;
+    object-fit: contain;
+    height: auto; /* nech sa výška prispôsobí obsahu */
+    max-height: 100%; /* zabránime prerasteniu */
     }
   }
 `
