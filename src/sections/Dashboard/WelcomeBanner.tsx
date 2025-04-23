@@ -56,20 +56,12 @@ const Welcome = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 24px;
-
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px); /* Safari podpora */
 
   @media (max-width: 600px) {
-    align-items: center;
-    padding: 12px;
+    align-items: center; /* odstráni medzeru hore */
   }
 
-  img {
+    img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -79,7 +71,7 @@ const Welcome = styled.div`
 
     @media (max-width: 600px) {
       object-fit: contain;
-      transform: scale(1.05);
+      transform: scale(1.05); /* trošku priblíži obrázok */
     }
   }
 `
