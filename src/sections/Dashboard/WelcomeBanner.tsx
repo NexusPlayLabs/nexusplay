@@ -57,7 +57,7 @@ const Welcome = styled.div`
   align-items: flex-start;
   justify-content: center;
   border: 2px solid transparent;
-  border-radius: 10px;
+  border-radius: 6px;
 
   @media (max-width: 600px) {
     align-items: center; /* odstráni medzeru hore */
