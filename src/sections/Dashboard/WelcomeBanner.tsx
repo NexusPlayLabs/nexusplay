@@ -69,9 +69,10 @@ const Welcome = styled.div`
     display: block;
     border-radius: 20px;
 
-    @media (max-width: 600px) {
-      object-fit: contain;
-      transform: scale(1.05); /* trošku priblíži obrázok */
+  @media (max-width: 600px) {
+    object-fit: cover;
+    object-position: center;
+    height: 100%;
     }
   }
 `
