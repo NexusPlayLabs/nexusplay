@@ -60,7 +60,7 @@ const Welcome = styled.div`
   @media (max-width: 600px) {
     height: auto;           /* dôležité! výška podľa obrázka */
     align-items: center;    /* centrovanie obsahu vertikálne */
-    padding-top: 0;
+    padding-top: 10;
     margin-top: 0;
   }
 
