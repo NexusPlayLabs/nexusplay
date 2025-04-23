@@ -60,7 +60,7 @@ const Welcome = styled.div`
   @media (max-width: 600px) {
     height: auto;           /* dôležité! výška podľa obrázka */
     align-items: center;    /* centrovanie obsahu vertikálne */
-    padding-top: 10px;
+    padding-top: 25px;
   }
 
   img {
@@ -81,18 +81,18 @@ const Welcome = styled.div`
 
 const Overlay = styled.div`
   position: absolute;
-  bottom: 55px; /* vždy 40px od spodku na mobile */
+  bottom: 24px; /* ← posunú nižšie na spodok obrázka */
   left: 0;
   z-index: 2;
   width: 100%;
-  padding: 24px;
+  padding: 0 24px; /* iba do strán, nie hore-dole */
   display: flex;
   justify-content: center;
   box-sizing: border-box;
   flex-wrap: wrap;
 
   @media (min-width: 601px) {
-    bottom: 0; /* na väčších obrazovkách sa drží pri spodku obrázka */
+    bottom: 24px;
   }
 `
 
