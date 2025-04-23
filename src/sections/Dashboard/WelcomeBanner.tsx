@@ -58,21 +58,24 @@ const Welcome = styled.div`
   justify-content: center;
 
   @media (max-width: 600px) {
-    align-items: center; /* odstráni medzeru hore */
+    height: auto;           /* dôležité! výška podľa obrázka */
+    align-items: center;    /* centrovanie obsahu vertikálne */
+    padding-top: 0;
+    margin-top: 0;
   }
 
-    img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-  border-radius: 20px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    border-radius: 20px;
 
-  @media (max-width: 600px) {
-    object-fit: contain;
-    height: auto; /* nech sa výška prispôsobí obsahu */
-    max-height: 100%; /* zabránime prerasteniu */
+    @media (max-width: 600px) {
+      object-fit: contain;
+      height: auto;
+      max-height: 100%;
     }
   }
 `
