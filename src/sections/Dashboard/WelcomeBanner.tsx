@@ -67,7 +67,7 @@ const Welcome = styled.div`
     object-fit: cover;
     object-position: center;
     display: block;
-    border-radius: 10px;
+    border-radius: 20px;
 
     @media (max-width: 600px) {
       object-fit: contain;
