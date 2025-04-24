@@ -12,7 +12,7 @@ import { PLATFORM_JACKPOT_FEE } from '../constants'
 import TokenSelect from './TokenSelect'
 import ConnectModal from '../components/ConnectModal'
 import { useWalletModal, useWallet } from '@solana/wallet-adapter-react-ui'
-import { Modal } from './Modal'
+import Modal from '../components/Modal'  {/* Opravený import */}
 
 const Bonus = styled.button`
   all: unset;
