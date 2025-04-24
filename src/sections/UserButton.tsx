@@ -1,12 +1,13 @@
+import React, { useState } from 'react'
 import { useWallet } from '@solana/wallet-adapter-react'
 import { useWalletModal } from '@solana/wallet-adapter-react-ui'
 import { GambaUi, useReferral } from 'gamba-react-ui-v2'
-import React, { useState } from 'react'
-import { Modal } from '../components/Modal'
-import { PLATFORM_ALLOW_REFERRER_REMOVAL, PLATFORM_REFERRAL_FEE } from '../constants'
-import { useToast } from '../hooks/useToast'
 import { useUserStore } from '../hooks/useUserStore'
 import { truncateString } from '../utils'
+import { Modal } from '../components/Modal'
+import { useToast } from '../hooks/useToast'
+import ConnectModal from './ConnectModal'
+import { PLATFORM_ALLOW_REFERRER_REMOVAL, PLATFORM_REFERRAL_FEE } from '../constants'
 
 function UserModal() {
   const user = useUserStore()
@@ -73,25 +74,23 @@ export function UserButton() {
   const walletModal = useWalletModal()
   const wallet = useWallet()
   const user = useUserStore()
+  const [showConnectModal, setShowConnectModal] = useState(false)
 
-  const connect = () => {
-    if (wallet.wallet) {
-      wallet.connect()
-    } else {
+  const handleSelect = (method: 'wallet' | 'twitter') => {
+    setShowConnectModal(false)
+    if (method === 'wallet') {
       walletModal.setVisible(true)
+    } else if (method === 'twitter') {
+      console.log('TODO: Handle Twitter connect') // Môžeš neskôr implementovať Twitter OAuth
     }
   }
 
   return (
     <>
-      {wallet.connected && user.userModal && (
-        <UserModal />
-      )}
+      {wallet.connected && user.userModal && <UserModal />}
       {wallet.connected ? (
         <div style={{ position: 'relative' }}>
-          <GambaUi.Button
-            onClick={() => user.set({ userModal: true })}
-          >
+          <GambaUi.Button onClick={() => user.set({ userModal: true })}>
             <div style={{ display: 'flex', gap: '.5em', alignItems: 'center' }}>
               <img src={wallet.wallet?.adapter.icon} height="20px" />
               {truncateString(wallet.publicKey?.toBase58(), 3)}
@@ -99,9 +98,16 @@ export function UserButton() {
           </GambaUi.Button>
         </div>
       ) : (
-        <GambaUi.Button onClick={connect}>
-          {wallet.connecting ? 'Connecting' : 'Connect'}
-        </GambaUi.Button>
+        <>
+          <GambaUi.Button onClick={() => setShowConnectModal(true)} style={{ backgroundColor: '#93ec39', color: '#000' }}>
+            Connect
+          </GambaUi.Button>
+          <ConnectModal
+            isOpen={showConnectModal}
+            onClose={() => setShowConnectModal(false)}
+            onSelect={handleSelect}
+          />
+        </>
       )}
     </>
   )
