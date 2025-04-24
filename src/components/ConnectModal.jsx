@@ -9,6 +9,14 @@ const ModalContainer = styled.div`
   align-items: center;
   background: #1a1a1a;
   border-radius: 16px;
+  width: 100%;
+  max-width: 400px;
+
+  @media (max-width: 480px) {
+    padding: 24px 16px;
+    max-width: 90vw;
+    border-radius: 12px;
+  }
 `
 
 const Title = styled.h2`
@@ -16,6 +24,11 @@ const Title = styled.h2`
   font-size: 28px;
   font-weight: bold;
   margin-bottom: 24px;
+
+  @media (max-width: 480px) {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
 `
 
 const Info = styled.p`
@@ -24,6 +37,11 @@ const Info = styled.p`
   margin-top: 24px;
   text-align: center;
   max-width: 300px;
+
+  @media (max-width: 480px) {
+    font-size: 13px;
+    margin-top: 20px;
+  }
 `
 
 const ConnectButton = styled.button`
@@ -54,6 +72,12 @@ const ConnectButton = styled.button`
     width: 20px;
     height: 20px;
   }
+
+  @media (max-width: 480px) {
+    font-size: 15px;
+    padding: 12px 20px;
+    border-radius: 12px;
+  }
 `
 
 export default function ConnectModal({ isOpen, onClose, onSelect }) {
@@ -69,10 +93,10 @@ export default function ConnectModal({ isOpen, onClose, onSelect }) {
         </ConnectButton>
         <ConnectButton onClick={() => onSelect('twitter')}>
           <img src="/twitter_logo.png" alt="Twitter logo" />
-          Connect Twitter
+          Connect with Twitter
         </ConnectButton>
         <Info>
-          You only need to connect one to fully access the site.
+          You only need to connect once to fully access the site.
         </Info>
       </ModalContainer>
     </Modal>
