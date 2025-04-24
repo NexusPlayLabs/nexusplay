@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Modal } from './Modal'
-import { signIn } from 'next-auth/react'
 
 const Container = styled.div`
   padding: 30px 20px;
@@ -12,6 +11,12 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
   max-width: 400px;
+
+  @media (max-width: 480px) {
+    padding: 24px 16px;
+    max-width: 90vw;
+    border-radius: 12px;
+  }
 `
 
 const Title = styled.h2`
@@ -19,6 +24,11 @@ const Title = styled.h2`
   font-size: 28px;
   margin-bottom: 24px;
   text-align: center;
+
+  @media (max-width: 480px) {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
 `
 
 const Info = styled.p`
@@ -27,9 +37,15 @@ const Info = styled.p`
   margin-top: 24px;
   text-align: center;
   max-width: 300px;
+
+  @media (max-width: 480px) {
+    font-size: 13px;
+    margin-top: 20px;
+  }
 `
 
-const ConnectButton = styled.button<{ bg?: string; text?: string }>`
+// Odstránili sme `<{ bg?: string; text?: string }>` generiká
+const ConnectButton = styled.button`
   background: ${(p) => p.bg || '#03ffa4'};
   color: ${(p) => p.text || '#000'};
   font-weight: bold;
@@ -46,23 +62,27 @@ const ConnectButton = styled.button<{ bg?: string; text?: string }>`
   gap: 12px;
   justify-content: center;
   transition: all 0.2s ease;
+  box-shadow: 0 0 12px rgba(3, 255, 164, 0.3);
+
+  &:hover {
+    background: #02e294;
+    box-shadow: 0 0 18px rgba(3, 255, 164, 0.5);
+  }
+
+  & img {
+    width: 20px;
+    height: 20px;
+  }
 `
 
-interface Props {
-  isOpen: boolean
-  onClose: () => void
-  onSelect: (method: 'twitter' | 'wallet') => void
-  twitterConnected: boolean
-  twitterUser: string | null
-}
-
+// Žiadne TS interface, čisté JS props
 export default function ConnectModal({
   isOpen,
   onClose,
   onSelect,
   twitterConnected,
   twitterUser
-}: Props) {
+}) {
   if (!isOpen) return null
 
   return (
@@ -72,7 +92,9 @@ export default function ConnectModal({
 
         {twitterConnected ? (
           <>
-            <Info>Twitter pripojený ako <b>{twitterUser}</b></Info>
+            <Info>
+              Twitter pripojený ako <b>{twitterUser}</b>
+            </Info>
             <ConnectButton bg="#00FFA3" onClick={() => onSelect('wallet')}>
               <img src="/wallet_logo.png" alt="Wallet" />
               Connect Wallet
@@ -80,7 +102,7 @@ export default function ConnectModal({
           </>
         ) : (
           <>
-            <ConnectButton bg="#1DA1F2" text="#fff" onClick={() => signIn('twitter')}>
+            <ConnectButton bg="#1DA1F2" text="#fff" onClick={() => onSelect('twitter')}>
               <img src="/twitter_logo.png" alt="Twitter" />
               Connect Twitter
             </ConnectButton>
