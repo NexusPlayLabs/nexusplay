@@ -7,17 +7,39 @@ interface Props extends React.PropsWithChildren {
   onClose?: () => void
 }
 
+const StyledModal = styled.div`
+  @keyframes appear {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(21, 21, 31, 0.95); // tmavšie a menej priesvitné
+  z-index: 100;
+  overflow-y: auto;
+  height: 100vh;
+  animation: appear 0.3s;
+`
+
 const Container = styled.div`
   display: flex;
   padding: 20px;
-  min-height: calc(100vh - 6rem);
+  min-height: 100vh;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 480px) {
+    padding: 12px;
+  }
 `
 
 const Wrapper = styled.div`
   @keyframes wrapper-appear2 {
-    0% { transform: scale(.9); }
+    0% { transform: scale(0.9); }
     100% { transform: scale(1); }
   }
 
@@ -26,85 +48,52 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  z-index: 100;
+  z-index: 101;
   max-width: min(100%, 460px);
-  border-radius: 10px;
+  width: 100%;
   background: #15151f;
+  border-radius: 10px;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
-  flex: 1;
   padding-bottom: 20px;
-  animation: wrapper-appear2 .3s;
+  animation: wrapper-appear2 0.3s;
   color: white;
 `
 
-const StyledModal = styled.div`
-  @keyframes appear {
-    0% { opacity: 0;}
-    100% { opacity: 1;}
+const CloseButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  width: 2em;
+  height: 2em;
+  opacity: 0.75;
+  transition: opacity 0.2s, background 0.2s;
+  cursor: pointer;
+  z-index: 11;
+
+  &:hover {
+    opacity: 1;
+    background: #ffffff22;
   }
 
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  transition: opacity linear 150ms;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 100;
-  overflow-y: auto;
-  height: 100vh;
-  animation: appear .3s;
-
-  & h1 {
-    text-align: center;
-    padding: 40px 0 20px 0;
-    font-size: 24px;
-  }
-
-  & p {
-    padding: 0 30px;
-    text-align: center;
-  }
-
-  & button.close {
-    margin: 0;
-    position: absolute;
-    cursor: pointer;
-    right: 10px;
-    top: 10px;
-    border: none;
-    z-index: 11;
-    opacity: .75;
-    transition: opacity .2s, background .2s;
-    background: transparent;
-    border-radius: 50%;
-    width: 2em;
-    height: 2em;
-    &:hover {
-      opacity: 1;
-      background: #ffffff22;
-    }
-    & svg {
-      color: white;
-      vertical-align: middle;
-    }
+  & svg {
+    color: white;
+    vertical-align: middle;
   }
 `
 
 export function Modal({ children, onClose }: Props) {
-  React.useEffect(
-    () => {
-      const oldValue = document.body.style.overflow
-      document.body.style.overflow = 'hidden'
-      return () => {
-        document.body.style.overflow = oldValue
-      }
-    },
-    [],
-  )
+  React.useEffect(() => {
+    const oldValue = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = oldValue
+    }
+  }, [])
 
   const ref = React.useRef<HTMLDivElement>(null!)
-
   useOutsideClick(ref, () => onClose && onClose())
 
   return (
@@ -112,9 +101,9 @@ export function Modal({ children, onClose }: Props) {
       <Container>
         <Wrapper ref={ref}>
           {onClose && (
-            <button className="close" onClick={onClose}>
+            <CloseButton onClick={onClose}>
               <Icon.Close2 />
-            </button>
+            </CloseButton>
           )}
           {children}
         </Wrapper>
