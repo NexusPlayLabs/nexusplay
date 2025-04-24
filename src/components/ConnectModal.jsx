@@ -93,7 +93,7 @@ export default function ConnectModal({ isOpen, onClose, onSelect }) {
         </ConnectButton>
         <ConnectButton onClick={() => onSelect('twitter')}>
           <img src="/twitter_logo.png" alt="Twitter logo" />
-          Connect with Twitter
+          Connect Twitter
         </ConnectButton>
         <Info>
           You only need to connect once to fully access the site.
