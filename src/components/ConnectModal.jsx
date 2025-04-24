@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Modal } from './Modal'
 
-const Container = styled.div`
+const Container = styled.div
   padding: 30px 20px;
   background: #1a1a1a;
   border-radius: 16px;
@@ -17,9 +17,9 @@ const Container = styled.div`
     max-width: 90vw;
     border-radius: 12px;
   }
-`
 
-const Title = styled.h2`
+
+const Title = styled.h2
   color: #fff;
   font-size: 28px;
   margin-bottom: 24px;
@@ -29,9 +29,9 @@ const Title = styled.h2`
     font-size: 22px;
     margin-bottom: 20px;
   }
-`
 
-const Info = styled.p`
+
+const Info = styled.p
   color: #888;
   font-size: 14px;
   margin-top: 24px;
@@ -42,9 +42,10 @@ const Info = styled.p`
     font-size: 13px;
     margin-top: 20px;
   }
-`
 
-const ConnectButton = styled.button`
+
+// Odstránili sme <{ bg?: string; text?: string }> generiká
+const ConnectButton = styled.button
   background: ${(p) => p.bg || '#03ffa4'};
   color: ${(p) => p.text || '#000'};
   font-weight: bold;
@@ -72,15 +73,9 @@ const ConnectButton = styled.button`
     width: 20px;
     height: 20px;
   }
-`
 
-const walletDeepLinks = {
-  Phantom: 'https://phantom.app/ul/browse',
-  Solflare: 'https://solflare.com/ul/connect',
-  MetaMask: 'https://metamask.app.link/',
-  SubWallet: 'https://subwallet.app/ul/connect',
-}
 
+// Žiadne TS interface, čisté JS props
 export default function ConnectModal({
   isOpen,
   onClose,
@@ -89,16 +84,6 @@ export default function ConnectModal({
   twitterUser
 }) {
   if (!isOpen) return null
-
-  const isMobile = window.innerWidth <= 768
-
-  const handleWalletClick = (walletName) => {
-    if (isMobile && walletDeepLinks[walletName]) {
-      window.open(walletDeepLinks[walletName], '_blank')
-    }
-    onSelect('wallet')
-    onClose()
-  }
 
   return (
     <Modal onClose={onClose}>
@@ -110,13 +95,10 @@ export default function ConnectModal({
             <Info>
               Twitter pripojený ako <b>{twitterUser}</b>
             </Info>
-
-            {Object.entries(walletDeepLinks).map(([name, link]) => (
-              <ConnectButton key={name} onClick={() => handleWalletClick(name)}>
-                <img src={`/${name.toLowerCase()}.png`} alt={name} />
-                {name}
-              </ConnectButton>
-            ))}
+            <ConnectButton bg="#00FFA3" onClick={() => onSelect('wallet')}>
+              <img src="/wallet_logo.png" alt="Wallet" />
+              Connect Wallet
+            </ConnectButton>
           </>
         ) : (
           <>
@@ -124,13 +106,10 @@ export default function ConnectModal({
               <img src="/twitter_logo.png" alt="Twitter" />
               Connect Twitter
             </ConnectButton>
-
-            {Object.entries(walletDeepLinks).map(([name, link]) => (
-              <ConnectButton key={name} onClick={() => handleWalletClick(name)}>
-                <img src={`/${name.toLowerCase()}.png`} alt={name} />
-                {name}
-              </ConnectButton>
-            ))}
+            <ConnectButton bg="#00FFA3" onClick={() => onSelect('wallet')}>
+              <img src="/wallet_logo.png" alt="Wallet" />
+              Connect Wallet
+            </ConnectButton>
           </>
         )}
 
