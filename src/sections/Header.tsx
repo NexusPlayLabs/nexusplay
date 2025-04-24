@@ -5,8 +5,7 @@ import styled from 'styled-components'
 import { Modal } from '../components/Modal'
 import { PLATFORM_JACKPOT_FEE } from '../constants'
 import TokenSelect from './TokenSelect'
-// import { UserButton } from './UserButton' // 👈 odstránime
-import ConnectModal from '../components/ConnectModal' // 👈 nový modal
+import { Icon } from '../components/Icon'
 
 const Bonus = styled.button`
   all: unset;
@@ -30,12 +29,14 @@ const StyledHeader = styled.div`
   justify-content: space-between;
   width: 100%;
   padding: 10px;
+  background: rgba(33, 34, 51, 0.9);
+  position: fixed;
   background: #000000CC;
   backdrop-filter: blur(20px);
-  position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
+  backdrop-filter: blur(20px);
 `
 
 const Logo = styled(NavLink)`
@@ -43,12 +44,25 @@ const Logo = styled(NavLink)`
   width: 100%;
   max-width: 200px;
   margin: 0 10px;
-
   & > img {
     width: 100%;
     height: auto;
   }
 `
+
+const ConnectModal = ({ isOpen, onClose, onSelect }) => {
+  if (!isOpen) return null
+
+  return (
+    <Modal onClose={onClose}>
+      <h1>Connect</h1>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 24 }}>
+        <button onClick={() => onSelect('twitter')} style={{ padding: 12, background: '#1DA1F2', color: 'white', border: 'none', borderRadius: 8, fontWeight: 'bold' }}>Connect with Twitter</button>
+        <button onClick={() => onSelect('wallet')} style={{ padding: 12, background: '#03ffa4', color: '#003c00', border: 'none', borderRadius: 8, fontWeight: 'bold' }}>Connect Wallet</button>
+      </div>
+    </Modal>
+  )
+}
 
 export default function Header() {
   const pool = useCurrentPool()
@@ -56,16 +70,14 @@ export default function Header() {
   const balance = useUserBalance()
   const [bonusHelp, setBonusHelp] = React.useState(false)
   const [jackpotHelp, setJackpotHelp] = React.useState(false)
-  const [connectModalOpen, setConnectModalOpen] = React.useState(false)
+  const [connectOpen, setConnectOpen] = React.useState(false)
 
-  const handleConnectSelect = (option) => {
-    setConnectModalOpen(false)
-    if (option === 'twitter') {
-      console.log('Spúšťam Twitter login...')
-      // TODO: Tu pridáš Twitter OAuth login
-    } else if (option === 'wallet') {
-      console.log('Zobraziť výber wallet...')
-      // TODO: Tu otvoríš wallet modal alebo komponent
+  const handleConnectSelect = (method) => {
+    setConnectOpen(false)
+    if (method === 'twitter') {
+      console.log('Twitter login')
+    } else {
+      console.log('Wallet connect')
     }
   }
 
@@ -75,7 +87,7 @@ export default function Header() {
         <Modal onClose={() => setBonusHelp(false)}>
           <h1>Bonus ✨</h1>
           <p>
-            You have <b><TokenValue amount={balance.bonusBalance} /></b> worth of free plays.
+            You have <b><TokenValue amount={balance.bonusBalance} /></b> worth of free plays. This bonus will be applied automatically when you play.
           </p>
           <p>
             Note that a fee is still needed from your wallet for each play.
@@ -89,7 +101,7 @@ export default function Header() {
             There{'\''}s <TokenValue amount={pool.jackpotBalance} /> in the Jackpot.
           </p>
           <p>
-            The Jackpot is a prize pool that grows with every bet made.
+            The Jackpot is a prize pool that grows with every bet made. As the Jackpot grows, so does your chance of winning. Once a winner is selected, the value of the Jackpot resets and grows from there until a new winner is selected.
           </p>
           <p>
             You will be paying a maximum of {(PLATFORM_JACKPOT_FEE * 100).toLocaleString(undefined, { maximumFractionDigits: 4 })}% for each wager for a chance to win.
@@ -103,7 +115,6 @@ export default function Header() {
           </label>
         </Modal>
       )}
-
       <StyledHeader>
         <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
           <Logo to="/">
@@ -122,29 +133,12 @@ export default function Header() {
             </Bonus>
           )}
           <TokenSelect />
-          {/* 👇 Nové "Connect" tlačidlo */}
-          <button
-            onClick={() => setConnectModalOpen(true)}
-            style={{
-              background: '#03ffa4',
-              padding: '6px 12px',
-              borderRadius: '10px',
-              fontWeight: 'bold',
-              color: '#003c00',
-              cursor: 'pointer',
-            }}
-          >
+          <button onClick={() => setConnectOpen(true)} style={{ padding: '6px 16px', borderRadius: 8, background: '#03ffa4', color: '#003c00', fontWeight: 'bold' }}>
             Connect
           </button>
         </div>
       </StyledHeader>
-
-      {/* 👇 Modal výberu spôsobu pripojenia */}
-      <ConnectModal
-        isOpen={connectModalOpen}
-        onClose={() => setConnectModalOpen(false)}
-        onSelect={handleConnectSelect}
-      />
+      <ConnectModal isOpen={connectOpen} onClose={() => setConnectOpen(false)} onSelect={handleConnectSelect} />
     </>
   )
 }
