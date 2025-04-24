@@ -13,7 +13,7 @@ import TokenSelect from './TokenSelect'
 import ConnectModal from '../components/ConnectModal'
 import { useWalletModal } from '@solana/wallet-adapter-react-ui'
 import { useWallet }      from '@solana/wallet-adapter-react'
-import Modal              from '../components/Modal'
+import { Modal }         from '../components/Modal'
 
 const Bonus = styled.button`
   all: unset;
