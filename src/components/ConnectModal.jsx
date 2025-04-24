@@ -44,7 +44,6 @@ const Info = styled.p`
   }
 `
 
-// Odstránili sme `<{ bg?: string; text?: string }>` generiká
 const ConnectButton = styled.button`
   background: ${(p) => p.bg || '#03ffa4'};
   color: ${(p) => p.text || '#000'};
@@ -114,7 +113,7 @@ export default function ConnectModal({
         )}
 
         <Info>
-          Twitter pripojenie je voliteľné, no pre plné použitie je potrebné pripojiť aj peňaženku.
+          Twitter connection is optional, but a wallet connection is required for full functionality.
         </Info>
       </Container>
     </Modal>
