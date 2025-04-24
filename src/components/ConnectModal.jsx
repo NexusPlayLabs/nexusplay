@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Modal } from './Modal'
 
@@ -74,7 +74,12 @@ const ConnectButton = styled.button`
   }
 `
 
-// Žiadne TS interface, čisté JS props
+const WALLET_DEEPLINKS = {
+  phantom: 'https://phantom.app/ul/browse/https://www.nexusplay.fun',
+  solflare: 'https://solflare.com/ul/v1/connect?redirect=https://www.nexusplay.fun',
+  subwallet: 'subwallet://dapp?url=https://www.nexusplay.fun',
+}
+
 export default function ConnectModal({
   isOpen,
   onClose,
@@ -82,6 +87,20 @@ export default function ConnectModal({
   twitterConnected,
   twitterUser
 }) {
+  const [selectingWallet, setSelectingWallet] = useState(false)
+  const [selectedWallet, setSelectedWallet] = useState(null)
+
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+
+  useEffect(() => {
+    if (isMobile && selectedWallet) {
+      const deeplink = WALLET_DEEPLINKS[selectedWallet]
+      if (deeplink) {
+        window.location.href = deeplink
+      }
+    }
+  }, [selectedWallet])
+
   if (!isOpen) return null
 
   return (
@@ -89,12 +108,33 @@ export default function ConnectModal({
       <Container>
         <Title>Connect</Title>
 
-        {twitterConnected ? (
+        {selectingWallet ? (
+          <>
+            <ConnectButton onClick={() => setSelectedWallet('phantom')}>
+              <img src="/wallets/phantom.svg" alt="Phantom" />
+              Phantom
+            </ConnectButton>
+            <ConnectButton onClick={() => setSelectedWallet('solflare')}>
+              <img src="/wallets/solflare.svg" alt="Solflare" />
+              Solflare
+            </ConnectButton>
+            <ConnectButton onClick={() => setSelectedWallet('subwallet')}>
+              <img src="/wallets/subwallet.svg" alt="SubWallet" />
+              SubWallet
+            </ConnectButton>
+          </>
+        ) : twitterConnected ? (
           <>
             <Info>
               Twitter pripojený ako <b>{twitterUser}</b>
             </Info>
-            <ConnectButton bg="#00FFA3" onClick={() => onSelect('wallet')}>
+            <ConnectButton bg="#00FFA3" onClick={() => {
+              if (isMobile) {
+                setSelectingWallet(true)
+              } else {
+                onSelect('wallet')
+              }
+            }}>
               <img src="/wallet_logo.png" alt="Wallet" />
               Connect Wallet
             </ConnectButton>
@@ -105,7 +145,13 @@ export default function ConnectModal({
               <img src="/twitter_logo.png" alt="Twitter" />
               Connect Twitter
             </ConnectButton>
-            <ConnectButton bg="#00FFA3" onClick={() => onSelect('wallet')}>
+            <ConnectButton bg="#00FFA3" onClick={() => {
+              if (isMobile) {
+                setSelectingWallet(true)
+              } else {
+                onSelect('wallet')
+              }
+            }}>
               <img src="/wallet_logo.png" alt="Wallet" />
               Connect Wallet
             </ConnectButton>
