@@ -1,30 +1,40 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Modal } from './Modal' // používame tvoj existujúci Modal komponent
+import { Modal } from './Modal'
 
 const OptionButton = styled.button`
-  all: unset;
-  background: #03ffa4;
-  color: #003c00;
-  font-weight: bold;
-  text-align: center;
-  padding: 12px 20px;
+  background: ${props => props.color || '#93ec39'};
+  color: #000;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 14px 24px;
   border-radius: 12px;
-  margin: 10px 0;
   width: 100%;
+  margin: 8px 0;
+  border: none;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
-    background: white;
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   }
 `
 
 const Title = styled.h2`
   color: white;
-  margin-bottom: 20px;
-  font-size: 20px;
+  font-size: 24px;
+  margin-bottom: 24px;
   text-align: center;
+  font-weight: 700;
+`
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 24px;
+  max-width: 320px;
 `
 
 export default function ConnectModal({ isOpen, onClose, onSelect }) {
@@ -32,13 +42,21 @@ export default function ConnectModal({ isOpen, onClose, onSelect }) {
 
   return (
     <Modal onClose={onClose}>
-      <Title>Select connection method</Title>
-      <OptionButton onClick={() => onSelect('twitter')}>
-        Connect with Twitter
-      </OptionButton>
-      <OptionButton onClick={() => onSelect('wallet')}>
-        Connect Wallet
-      </OptionButton>
+      <Title>Connect</Title>
+      <ButtonContainer>
+        <OptionButton
+          onClick={() => onSelect('twitter')}
+          color="#1DA1F2"
+        >
+          Connect with Twitter
+        </OptionButton>
+        <OptionButton
+          onClick={() => onSelect('wallet')}
+          color="#03ffa4"
+        >
+          Connect Wallet
+        </OptionButton>
+      </ButtonContainer>
     </Modal>
   )
 }
