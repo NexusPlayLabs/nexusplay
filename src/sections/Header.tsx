@@ -130,7 +130,8 @@ export default function Header() {
               borderRadius: 8,
               background: '#93ec39',
               color: '#003c00',
-              fontWeight: 'bold'
+              fontWeight: 'bold',
+              cursor: 'pointer',
             }}
           >
             Connect
