@@ -2,39 +2,38 @@ import React from 'react'
 import styled from 'styled-components'
 import { Modal } from './Modal'
 
-const OptionButton = styled.button`
-  background: ${props => props.color || '#93ec39'};
-  color: #000;
-  font-weight: 600;
-  font-size: 16px;
-  padding: 14px 24px;
-  border-radius: 12px;
-  width: 100%;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-  &:hover {
-    transform: scale(1.02);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  }
+const ModalContainer = styled.div`
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 
 const Title = styled.h2`
   color: white;
   font-size: 24px;
-  margin-bottom: 24px;
-  text-align: center;
-  font-weight: 700;
+  font-weight: bold;
+  margin-bottom: 30px;
 `
 
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+const ConnectButton = styled.button`
+  background: ${(props) => props.bg || '#555'};
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 20px;
+  margin: 10px 0;
+  font-size: 16px;
   width: 100%;
-  padding: 0 24px;
-  max-width: 320px;
+  max-width: 280px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+
+  &:hover {
+    opacity: 0.9;
+  }
 `
 
 export default function ConnectModal({ isOpen, onClose, onSelect }) {
@@ -42,21 +41,15 @@ export default function ConnectModal({ isOpen, onClose, onSelect }) {
 
   return (
     <Modal onClose={onClose}>
-      <Title>Connect</Title>
-      <ButtonContainer>
-        <OptionButton
-          onClick={() => onSelect('twitter')}
-          color="#1DA1F2"
-        >
+      <ModalContainer>
+        <Title>Connect</Title>
+        <ConnectButton bg="#1DA1F2" onClick={() => onSelect('twitter')}>
           Connect with Twitter
-        </OptionButton>
-        <OptionButton
-          onClick={() => onSelect('wallet')}
-          color="#03ffa4"
-        >
+        </ConnectButton>
+        <ConnectButton bg="#00FFA3" onClick={() => onSelect('wallet')}>
           Connect Wallet
-        </OptionButton>
-      </ButtonContainer>
+        </ConnectButton>
+      </ModalContainer>
     </Modal>
   )
 }
