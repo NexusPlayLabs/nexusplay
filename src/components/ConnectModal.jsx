@@ -111,17 +111,24 @@ export default function ConnectModal({
         {selectingWallet ? (
           <>
             <ConnectButton onClick={() => setSelectedWallet('phantom')}>
-              <img src="/wallets/phantom.svg" alt="Phantom" />
-              Phantom
-            </ConnectButton>
-            <ConnectButton onClick={() => setSelectedWallet('solflare')}>
-              <img src="/wallets/solflare.svg" alt="Solflare" />
-              Solflare
-            </ConnectButton>
-            <ConnectButton onClick={() => setSelectedWallet('subwallet')}>
-              <img src="/wallets/subwallet.svg" alt="SubWallet" />
-              SubWallet
-            </ConnectButton>
+                <img src="/phantom.webp" alt="Phantom" />
+                Phantom
+              </ConnectButton>
+              
+              <ConnectButton onClick={() => setSelectedWallet('solflare')}>
+                <img src="/solflare.svg" alt="Solflare" />
+                Solflare
+              </ConnectButton>
+              
+              <ConnectButton onClick={() => setSelectedWallet('subwallet')}>
+                <img src="/subwallet.jpeg" alt="SubWallet" />
+                SubWallet
+              </ConnectButton>
+              
+              <ConnectButton onClick={() => setSelectedWallet('metamask')}>
+                <img src="/metamask.png" alt="MetaMask" />
+                MetaMask
+              </ConnectButton>
           </>
         ) : twitterConnected ? (
           <>
