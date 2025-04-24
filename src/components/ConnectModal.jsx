@@ -1,8 +1,8 @@
-import React from 'react'
+mport React from 'react'
 import styled from 'styled-components'
 import { Modal } from './Modal'
 
-const Container = styled.div`
+const Container = styled.div
   padding: 30px 20px;
   background: #1a1a1a;
   border-radius: 16px;
@@ -17,10 +17,10 @@ const Container = styled.div`
     max-width: 90vw;
     border-radius: 12px;
   }
-`
 
-const Title = styled.h2`
-  color: #fff;
+
+const Title = styled.h2
+  color: #ffffff;
   font-size: 28px;
   margin-bottom: 24px;
   text-align: center;
@@ -29,9 +29,9 @@ const Title = styled.h2`
     font-size: 22px;
     margin-bottom: 20px;
   }
-`
 
-const Info = styled.p`
+
+const Info = styled.p
   color: #888;
   font-size: 14px;
   margin-top: 24px;
@@ -42,12 +42,11 @@ const Info = styled.p`
     font-size: 13px;
     margin-top: 20px;
   }
-`
 
-// Odstránili sme `<{ bg?: string; text?: string }>` generiká
-const ConnectButton = styled.button`
-  background: ${(p) => p.bg || '#03ffa4'};
-  color: ${(p) => p.text || '#000'};
+
+const ConnectButton = styled.button<{ bg?: string; text?: string }>
+  background: ${(props) => props.bg || '#03ffa4'};
+  color: ${(props) => props.text || '#000'};
   font-weight: bold;
   border: 2px solid #03ffa4;
   border-radius: 16px;
@@ -73,16 +72,23 @@ const ConnectButton = styled.button`
     width: 20px;
     height: 20px;
   }
-`
 
-// Žiadne TS interface, čisté JS props
+
+interface Props {
+  isOpen: boolean
+  onClose: () => void
+  onSelect: (method: 'twitter' | 'wallet') => void
+  twitterConnected: boolean
+  twitterUser: string | null
+}
+
 export default function ConnectModal({
   isOpen,
   onClose,
   onSelect,
   twitterConnected,
   twitterUser
-}) {
+}: Props) {
   if (!isOpen) return null
 
   return (
@@ -92,22 +98,20 @@ export default function ConnectModal({
 
         {twitterConnected ? (
           <>
-            <Info>
-              Twitter pripojený ako <b>{twitterUser}</b>
-            </Info>
+            <Info>Twitter pripojený ako <b>{twitterUser}</b></Info>
             <ConnectButton bg="#00FFA3" onClick={() => onSelect('wallet')}>
-              <img src="/wallet_logo.png" alt="Wallet" />
+              <img src="/wallet_logo.png" alt="Wallet logo" />
               Connect Wallet
             </ConnectButton>
           </>
         ) : (
           <>
             <ConnectButton bg="#1DA1F2" text="#fff" onClick={() => onSelect('twitter')}>
-              <img src="/twitter_logo.png" alt="Twitter" />
+              <img src="/twitter_logo.png" alt="Twitter logo" />
               Connect Twitter
             </ConnectButton>
             <ConnectButton bg="#00FFA3" onClick={() => onSelect('wallet')}>
-              <img src="/wallet_logo.png" alt="Wallet" />
+              <img src="/wallet_logo.png" alt="Wallet logo" />
               Connect Wallet
             </ConnectButton>
           </>
