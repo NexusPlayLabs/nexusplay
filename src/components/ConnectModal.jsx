@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Modal } from './Modal'
 
@@ -11,12 +11,6 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
   max-width: 400px;
-
-  @media (max-width: 480px) {
-    padding: 24px 16px;
-    max-width: 90vw;
-    border-radius: 12px;
-  }
 `
 
 const Title = styled.h2`
@@ -24,11 +18,6 @@ const Title = styled.h2`
   font-size: 28px;
   margin-bottom: 24px;
   text-align: center;
-
-  @media (max-width: 480px) {
-    font-size: 22px;
-    margin-bottom: 20px;
-  }
 `
 
 const Info = styled.p`
@@ -37,14 +26,8 @@ const Info = styled.p`
   margin-top: 24px;
   text-align: center;
   max-width: 300px;
-
-  @media (max-width: 480px) {
-    font-size: 13px;
-    margin-top: 20px;
-  }
 `
 
-// Odstránili sme `<{ bg?: string; text?: string }>` generiká
 const ConnectButton = styled.button`
   background: ${(p) => p.bg || '#03ffa4'};
   color: ${(p) => p.text || '#000'};
@@ -62,20 +45,15 @@ const ConnectButton = styled.button`
   gap: 12px;
   justify-content: center;
   transition: all 0.2s ease;
-  box-shadow: 0 0 12px rgba(3, 255, 164, 0.3);
-
-  &:hover {
-    background: #02e294;
-    box-shadow: 0 0 18px rgba(3, 255, 164, 0.5);
-  }
-
-  & img {
-    width: 20px;
-    height: 20px;
-  }
 `
 
-// Žiadne TS interface, čisté JS props
+const wallets = [
+  { name: 'Phantom', icon: '/phantom.png', link: 'https://phantom.app/ul/browse' },
+  { name: 'Solflare', icon: '/solflare.png', link: 'https://solflare.com/ul/connect' },
+  { name: 'MetaMask', icon: '/metamask.png', link: 'https://metamask.app.link/' },
+  { name: 'SubWallet', icon: '/subwallet.png', link: 'https://subwallet.app/ul/connect' },
+]
+
 export default function ConnectModal({
   isOpen,
   onClose,
@@ -83,34 +61,47 @@ export default function ConnectModal({
   twitterConnected,
   twitterUser
 }) {
+  const [selectingWallet, setSelectingWallet] = useState(false)
+
   if (!isOpen) return null
+
+  const handleWalletClick = (wallet) => {
+    // otvorenie deep linku len na mobilných zariadeniach
+    if (window.innerWidth < 768 && wallet.link) {
+      window.open(wallet.link, '_blank')
+    }
+    onSelect('wallet')
+    onClose()
+  }
 
   return (
     <Modal onClose={onClose}>
       <Container>
         <Title>Connect</Title>
 
-        {twitterConnected ? (
+        {!selectingWallet ? (
           <>
-            <Info>
-              Twitter pripojený ako <b>{twitterUser}</b>
-            </Info>
-            <ConnectButton bg="#00FFA3" onClick={() => onSelect('wallet')}>
+            {!twitterConnected ? (
+              <ConnectButton bg="#1DA1F2" text="#fff" onClick={() => onSelect('twitter')}>
+                <img src="/twitter_logo.png" alt="Twitter" />
+                Connect Twitter
+              </ConnectButton>
+            ) : (
+              <Info>Twitter pripojený ako <b>{twitterUser}</b></Info>
+            )}
+
+            <ConnectButton bg="#00FFA3" onClick={() => setSelectingWallet(true)}>
               <img src="/wallet_logo.png" alt="Wallet" />
               Connect Wallet
             </ConnectButton>
           </>
         ) : (
-          <>
-            <ConnectButton bg="#1DA1F2" text="#fff" onClick={() => onSelect('twitter')}>
-              <img src="/twitter_logo.png" alt="Twitter" />
-              Connect Twitter
+          wallets.map((wallet) => (
+            <ConnectButton key={wallet.name} onClick={() => handleWalletClick(wallet)}>
+              <img src={wallet.icon} alt={wallet.name} />
+              {wallet.name}
             </ConnectButton>
-            <ConnectButton bg="#00FFA3" onClick={() => onSelect('wallet')}>
-              <img src="/wallet_logo.png" alt="Wallet" />
-              Connect Wallet
-            </ConnectButton>
-          </>
+          ))
         )}
 
         <Info>
