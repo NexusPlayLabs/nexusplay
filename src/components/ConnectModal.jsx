@@ -63,16 +63,16 @@ export default function ConnectModal({ isOpen, onClose, onSelect }) {
     <Modal onClose={onClose}>
       <ModalContainer>
         <Title>Connect</Title>
-        <ConnectButton onClick={() => onSelect('twitter')}>
-          <img src="/twitter_logo.png" alt="Twitter logo" />
-          Connect with Twitter
-        </ConnectButton>
         <ConnectButton onClick={() => onSelect('wallet')}>
           <img src="/wallet_logo.png" alt="Wallet logo" />
           Connect Wallet
         </ConnectButton>
+        <ConnectButton onClick={() => onSelect('twitter')}>
+          <img src="/twitter_logo.png" alt="Twitter logo" />
+          Connect Twitter
+        </ConnectButton>
         <Info>
-          You only need to connect once to fully access the site.
+          You only need to connect one to fully access the site.
         </Info>
       </ModalContainer>
     </Modal>
