@@ -96,7 +96,7 @@ export default function ConnectModal({ isOpen, onClose, onSelect }) {
           Connect Twitter
         </ConnectButton>
         <Info>
-          You only need to connect once to fully access the site.
+          You only need to connect one to fully access the site.
         </Info>
       </ModalContainer>
     </Modal>
