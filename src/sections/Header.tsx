@@ -12,10 +12,10 @@ import { PLATFORM_JACKPOT_FEE } from '../constants'
 import TokenSelect from './TokenSelect'
 import ConnectModal from '../components/ConnectModal'
 import { useWalletModal } from '@solana/wallet-adapter-react-ui'
-import { useWallet }      from '@solana/wallet-adapter-react'
-import { Modal }          from '../components/Modal'
+import { useWallet } from '@solana/wallet-adapter-react'
+import { Modal } from '../components/Modal'
 
-const Bonus = styled.button
+const Bonus = styled.button`
   all: unset;
   cursor: pointer;
   color: #003c00;
@@ -29,9 +29,9 @@ const Bonus = styled.button
   &:hover {
     background: white;
   }
+`
 
-
-const StyledHeader = styled.div
+const StyledHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -43,9 +43,9 @@ const StyledHeader = styled.div
   top: 0;
   left: 0;
   z-index: 1000;
+`
 
-
-const Logo = styled(NavLink)
+const Logo = styled(NavLink)`
   height: auto;
   width: 100%;
   max-width: 200px;
@@ -54,7 +54,7 @@ const Logo = styled(NavLink)
     width: 100%;
     height: auto;
   }
-
+`
 
 export default function Header() {
   const pool = useCurrentPool()
@@ -70,14 +70,14 @@ export default function Header() {
     setConnectOpen(false)
     if (method === 'twitter') {
       console.log('Twitter login')
-      // TODO: integruj Twitter OAuth flow
+      // TODO: Integruj Twitter OAuth flow
     } else if (method === 'wallet') {
       walletModal.setVisible(true)
     }
   }
 
   const shortAddress = publicKey
-    ? ${publicKey.toBase58().slice(0, 4)}…${publicKey.toBase58().slice(-4)}
+    ? `${publicKey.toBase58().slice(0, 4)}…${publicKey.toBase58().slice(-4)}`
     : null
 
   return (
