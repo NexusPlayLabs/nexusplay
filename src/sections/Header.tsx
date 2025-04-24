@@ -1,11 +1,17 @@
-import { GambaUi, TokenValue, useCurrentPool, useGambaPlatformContext, useUserBalance } from 'gamba-react-ui-v2'
+import {
+  GambaUi,
+  TokenValue,
+  useCurrentPool,
+  useGambaPlatformContext,
+  useUserBalance
+} from 'gamba-react-ui-v2'
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
-import { Modal } from '../components/Modal'
 import { PLATFORM_JACKPOT_FEE } from '../constants'
 import TokenSelect from './TokenSelect'
 import { Icon } from '../components/Icon'
+import ConnectModal from '../components/ConnectModal' // <- použije tvoj moderný komponent
 
 const Bonus = styled.button`
   all: unset;
@@ -17,7 +23,7 @@ const Bonus = styled.button`
   font-size: 12px;
   text-transform: uppercase;
   font-weight: bold;
-  transition: background-color .2s;
+  transition: background-color 0.2s;
   &:hover {
     background: white;
   }
@@ -29,14 +35,12 @@ const StyledHeader = styled.div`
   justify-content: space-between;
   width: 100%;
   padding: 10px;
-  background: rgba(33, 34, 51, 0.9);
-  position: fixed;
-  background: #000000CC;
+  background: #000000cc;
   backdrop-filter: blur(20px);
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
-  backdrop-filter: blur(20px);
 `
 
 const Logo = styled(NavLink)`
@@ -50,20 +54,6 @@ const Logo = styled(NavLink)`
   }
 `
 
-const ConnectModal = ({ isOpen, onClose, onSelect }) => {
-  if (!isOpen) return null
-
-  return (
-    <Modal onClose={onClose}>
-      <h1>Connect</h1>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 24 }}>
-        <button onClick={() => onSelect('twitter')} style={{ padding: 12, background: '#1DA1F2', color: 'white', border: 'none', borderRadius: 8, fontWeight: 'bold' }}>Connect with Twitter</button>
-        <button onClick={() => onSelect('wallet')} style={{ padding: 12, background: '#03ffa4', color: '#003c00', border: 'none', borderRadius: 8, fontWeight: 'bold' }}>Connect Wallet</button>
-      </div>
-    </Modal>
-  )
-}
-
 export default function Header() {
   const pool = useCurrentPool()
   const context = useGambaPlatformContext()
@@ -72,12 +62,14 @@ export default function Header() {
   const [jackpotHelp, setJackpotHelp] = React.useState(false)
   const [connectOpen, setConnectOpen] = React.useState(false)
 
-  const handleConnectSelect = (method) => {
+  const handleConnectSelect = (method: string) => {
     setConnectOpen(false)
     if (method === 'twitter') {
       console.log('Twitter login')
-    } else {
+      // tu môžeš spustiť login flow
+    } else if (method === 'wallet') {
       console.log('Wallet connect')
+      // tu môžeš otvoriť wallet modal
     }
   }
 
@@ -89,16 +81,14 @@ export default function Header() {
           <p>
             You have <b><TokenValue amount={balance.bonusBalance} /></b> worth of free plays. This bonus will be applied automatically when you play.
           </p>
-          <p>
-            Note that a fee is still needed from your wallet for each play.
-          </p>
+          <p>Note that a fee is still needed from your wallet for each play.</p>
         </Modal>
       )}
       {jackpotHelp && (
         <Modal onClose={() => setJackpotHelp(false)}>
           <h1>Jackpot 💰</h1>
           <p style={{ fontWeight: 'bold' }}>
-            There{'\''}s <TokenValue amount={pool.jackpotBalance} /> in the Jackpot.
+            There&apos;s <TokenValue amount={pool.jackpotBalance} /> in the Jackpot.
           </p>
           <p>
             The Jackpot is a prize pool that grows with every bet made. As the Jackpot grows, so does your chance of winning. Once a winner is selected, the value of the Jackpot resets and grows from there until a new winner is selected.
@@ -121,7 +111,7 @@ export default function Header() {
             <img alt="NexusPlay logo" src="/logo_casino.png" />
           </Logo>
         </div>
-        <div style={{ display: 'flex', gap: '10px', alignItems: 'center', position: 'relative' }}>
+        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
           {pool.jackpotBalance > 0 && (
             <Bonus onClick={() => setJackpotHelp(true)}>
               💰 <TokenValue amount={pool.jackpotBalance} />
@@ -133,12 +123,25 @@ export default function Header() {
             </Bonus>
           )}
           <TokenSelect />
-          <button onClick={() => setConnectOpen(true)} style={{ padding: '6px 16px', borderRadius: 8, background: '#03ffa4', color: '#003c00', fontWeight: 'bold' }}>
+          <button
+            onClick={() => setConnectOpen(true)}
+            style={{
+              padding: '6px 16px',
+              borderRadius: 8,
+              background: '#93ec39',
+              color: '#003c00',
+              fontWeight: 'bold'
+            }}
+          >
             Connect
           </button>
         </div>
       </StyledHeader>
-      <ConnectModal isOpen={connectOpen} onClose={() => setConnectOpen(false)} onSelect={handleConnectSelect} />
+      <ConnectModal
+        isOpen={connectOpen}
+        onClose={() => setConnectOpen(false)}
+        onSelect={handleConnectSelect}
+      />
     </>
   )
 }
