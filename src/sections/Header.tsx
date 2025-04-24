@@ -6,6 +6,7 @@ import { Modal } from '../components/Modal'
 import { PLATFORM_JACKPOT_FEE } from '../constants'
 import TokenSelect from './TokenSelect'
 import { UserButton } from './UserButton'
+import ConnectModal from '../components/ConnectModal' // 👈 Import nového modalu
 
 const Bonus = styled.button`
   all: unset;
@@ -42,9 +43,9 @@ const StyledHeader = styled.div`
 const Logo = styled(NavLink)`
   height: auto;
   width: 100%;
-  max-width: 200px; /* Maximálna šírka loga, ktorá zabezpečí, že logo bude mať rozumnú veľkosť aj na väčších obrazovkách */
+  max-width: 200px;
   margin: 0 10px;
-  
+
   & > img {
     width: 100%;
     height: auto;
@@ -57,6 +58,18 @@ export default function Header() {
   const balance = useUserBalance()
   const [bonusHelp, setBonusHelp] = React.useState(false)
   const [jackpotHelp, setJackpotHelp] = React.useState(false)
+  const [connectModalOpen, setConnectModalOpen] = React.useState(false) // 👈 stav pre modal
+
+  const handleConnectSelect = (option) => {
+    setConnectModalOpen(false)
+    if (option === 'twitter') {
+      console.log('Spúšťam Twitter login...')
+      // TODO: Spustiť Twitter OAuth login
+    } else if (option === 'wallet') {
+      console.log('Zobraziť výber wallet...')
+      // TODO: Zobraziť výber wallet okna
+    }
+  }
 
   return (
     <>
@@ -111,8 +124,29 @@ export default function Header() {
           )}
           <TokenSelect />
           <UserButton />
+          {/* 👇 Connect Button */}
+          <button
+            onClick={() => setConnectModalOpen(true)}
+            style={{
+              background: '#03ffa4',
+              padding: '6px 12px',
+              borderRadius: '10px',
+              fontWeight: 'bold',
+              color: '#003c00',
+              cursor: 'pointer',
+            }}
+          >
+            Connect
+          </button>
         </div>
       </StyledHeader>
+
+      {/* 👇 Modal component */}
+      <ConnectModal
+        isOpen={connectModalOpen}
+        onClose={() => setConnectModalOpen(false)}
+        onSelect={handleConnectSelect}
+      />
     </>
   )
 }
