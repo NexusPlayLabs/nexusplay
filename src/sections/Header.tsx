@@ -124,22 +124,18 @@ export default function Header() {
           )}
           <TokenSelect />
           <button
-          onClick={() => setConnectOpen(true)}
-          style={{
-            padding: '12px 20px',
-            borderRadius: '10px',
-            background: '#03ffa4',
-            color: '#003c00',
-            fontWeight: 'bold',
-            fontSize: '16px',
-            border: 'none',
-            cursor: 'pointer',
-            boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
-            transition: '0.2s ease',
-          }}
-        >
-          Connect
-        </button>
+            onClick={() => setConnectOpen(true)}
+            style={{
+              padding: '6px 16px',
+              borderRadius: 8,
+              background: '#03ffa4',
+              color: '#003c00',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+            }}
+          >
+            Connect
+          </button>
         </div>
       </StyledHeader>
       <ConnectModal
