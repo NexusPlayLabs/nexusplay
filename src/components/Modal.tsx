@@ -8,79 +8,48 @@ interface Props extends React.PropsWithChildren {
 }
 
 const StyledModal = styled.div`
-  @keyframes appear {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-  }
-
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(21, 21, 31, 0.95); // tmavšie a menej priesvitné
+  background: rgba(0, 0, 0, 0.5);
   z-index: 100;
-  overflow-y: auto;
-  height: 100vh;
-  animation: appear 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: appear 0.3s ease;
+
+  @keyframes appear {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
 `
 
 const Container = styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
-  padding: 20px;
-  min-height: 100vh;
   align-items: center;
   justify-content: center;
-
-  @media (max-width: 480px) {
-    padding: 12px;
-  }
 `
 
 const Wrapper = styled.div`
-  @keyframes wrapper-appear2 {
-    0% { transform: scale(0.9); }
-    100% { transform: scale(1); }
-  }
-
-  box-sizing: border-box;
   position: relative;
   display: flex;
-  align-items: center;
   flex-direction: column;
-  z-index: 101;
-  max-width: min(100%, 460px);
-  width: 100%;
   background: #15151f;
-  border-radius: 10px;
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
-  padding-bottom: 20px;
-  animation: wrapper-appear2 0.3s;
-  color: white;
-`
+  border-radius: 16px;
+  max-width: 400px;
+  width: 100%;
+  padding: 30px 20px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.6);
+  z-index: 110;
+  animation: wrapper-appear 0.3s ease;
 
-const CloseButton = styled.button`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: transparent;
-  border: none;
-  border-radius: 50%;
-  width: 2em;
-  height: 2em;
-  opacity: 0.75;
-  transition: opacity 0.2s, background 0.2s;
-  cursor: pointer;
-  z-index: 11;
-
-  &:hover {
-    opacity: 1;
-    background: #ffffff22;
-  }
-
-  & svg {
-    color: white;
-    vertical-align: middle;
+  @keyframes wrapper-appear {
+    0% { transform: scale(0.95); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
   }
 `
 
@@ -101,9 +70,9 @@ export function Modal({ children, onClose }: Props) {
       <Container>
         <Wrapper ref={ref}>
           {onClose && (
-            <CloseButton onClick={onClose}>
+            <button className="close" onClick={onClose}>
               <Icon.Close2 />
-            </CloseButton>
+            </button>
           )}
           {children}
         </Wrapper>
