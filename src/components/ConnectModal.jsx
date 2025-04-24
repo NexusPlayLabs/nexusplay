@@ -2,51 +2,35 @@ import React from 'react'
 import styled from 'styled-components'
 import { Modal } from './Modal'
 
-const ModalContainer = styled.div
+const Container = styled.div`
   padding: 30px 20px;
+  background: #1a1a1a;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #1a1a1a;
-  border-radius: 16px;
   width: 100%;
   max-width: 400px;
+`
 
-  @media (max-width: 480px) {
-    padding: 24px 16px;
-    max-width: 90vw;
-    border-radius: 12px;
-  }
-
-
-const Title = styled.h2
-  color: #ffffff;
+const Title = styled.h2`
+  color: #fff;
   font-size: 28px;
-  font-weight: bold;
   margin-bottom: 24px;
+  text-align: center;
+`
 
-  @media (max-width: 480px) {
-    font-size: 22px;
-    margin-bottom: 20px;
-  }
-
-
-const Info = styled.p
+const Info = styled.p`
   color: #888;
   font-size: 14px;
   margin-top: 24px;
   text-align: center;
   max-width: 300px;
+`
 
-  @media (max-width: 480px) {
-    font-size: 13px;
-    margin-top: 20px;
-  }
-
-
-const ConnectButton = styled.button
-  background: ${(props) => props.bg || '#03ffa4'};
-  color: ${(props) => props.text || '#000'};
+const ConnectButton = styled.button<{ bg?: string; text?: string }>`
+  background: ${(p) => p.bg || '#03ffa4'};
+  color: ${(p) => p.text || '#000'};
   font-weight: bold;
   border: 2px solid #03ffa4;
   border-radius: 16px;
@@ -56,49 +40,60 @@ const ConnectButton = styled.button
   width: 100%;
   max-width: 280px;
   cursor: pointer;
-  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   gap: 12px;
   justify-content: center;
-  box-shadow: 0 0 12px rgba(3, 255, 164, 0.3);
+  transition: all 0.2s ease;
+`
 
-  &:hover {
-    background: #02e294;
-    box-shadow: 0 0 18px rgba(3, 255, 164, 0.5);
-  }
+interface Props {
+  isOpen: boolean
+  onClose: () => void
+  onSelect: (method: 'twitter' | 'wallet') => void
+  twitterConnected: boolean
+  twitterUser: string | null
+}
 
-  & img {
-    width: 20px;
-    height: 20px;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 15px;
-    padding: 12px 20px;
-    border-radius: 12px;
-  }
-
-
-export default function ConnectModal({ isOpen, onClose, onSelect }) {
+export default function ConnectModal({
+  isOpen,
+  onClose,
+  onSelect,
+  twitterConnected,
+  twitterUser
+}: Props) {
   if (!isOpen) return null
 
   return (
     <Modal onClose={onClose}>
-      <ModalContainer>
+      <Container>
         <Title>Connect</Title>
-        <ConnectButton onClick={() => onSelect('wallet')}>
-          <img src="/wallet_logo.png" alt="Wallet logo" />
-          Connect Wallet
-        </ConnectButton>
-        <ConnectButton onClick={() => onSelect('twitter')}>
-          <img src="/twitter_logo.png" alt="Twitter logo" />
-          Connect Twitter
-        </ConnectButton>
+
+        {twitterConnected ? (
+          <>
+            <Info>Twitter pripojený ako <b>{twitterUser}</b></Info>
+            <ConnectButton bg="#00FFA3" onClick={() => onSelect('wallet')}>
+              <img src="/wallet_logo.png" alt="Wallet" />
+              Connect Wallet
+            </ConnectButton>
+          </>
+        ) : (
+          <>
+            <ConnectButton bg="#1DA1F2" text="#fff" onClick={() => onSelect('twitter')}>
+              <img src="/twitter_logo.png" alt="Twitter" />
+              Connect Twitter
+            </ConnectButton>
+            <ConnectButton bg="#00FFA3" onClick={() => onSelect('wallet')}>
+              <img src="/wallet_logo.png" alt="Wallet" />
+              Connect Wallet
+            </ConnectButton>
+          </>
+        )}
+
         <Info>
-          Twitter connection is optional. You can still use the site without it.
+          Twitter pripojenie je voliteľné, no pre plné použitie je potrebné pripojiť aj peňaženku.
         </Info>
-      </ModalContainer>
+      </Container>
     </Modal>
   )
 }
