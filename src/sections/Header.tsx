@@ -10,9 +10,9 @@ import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import { PLATFORM_JACKPOT_FEE } from '../constants'
 import TokenSelect from './TokenSelect'
-import { Icon } from '../components/Icon'
 import ConnectModal from '../components/ConnectModal'
-import { useWalletModal } from '@solana/wallet-adapter-react-ui'
+import { useWalletModal, useWallet } from '@solana/wallet-adapter-react-ui'
+import { Modal } from './Modal'
 
 const Bonus = styled.button`
   all: unset;
@@ -59,6 +59,7 @@ export default function Header() {
   const pool = useCurrentPool()
   const context = useGambaPlatformContext()
   const balance = useUserBalance()
+  const { publicKey } = useWallet()
   const [bonusHelp, setBonusHelp] = React.useState(false)
   const [jackpotHelp, setJackpotHelp] = React.useState(false)
   const [connectOpen, setConnectOpen] = React.useState(false)
@@ -68,11 +69,15 @@ export default function Header() {
     setConnectOpen(false)
     if (method === 'twitter') {
       console.log('Twitter login')
-      // tu môžeš spustiť login flow
+      // TODO: Integruj Twitter OAuth login flow
     } else if (method === 'wallet') {
       walletModal.setVisible(true)
     }
   }
+
+  const shortAddress = publicKey
+    ? `${publicKey.toBase58().slice(0, 4)}...${publicKey.toBase58().slice(-4)}`
+    : null
 
   return (
     <>
@@ -80,7 +85,8 @@ export default function Header() {
         <Modal onClose={() => setBonusHelp(false)}>
           <h1>Bonus ✨</h1>
           <p>
-            You have <b><TokenValue amount={balance.bonusBalance} /></b> worth of free plays. This bonus will be applied automatically when you play.
+            You have <b><TokenValue amount={balance.bonusBalance} /></b> worth of free plays.
+            This bonus will be applied automatically when you play.
           </p>
           <p>Note that a fee is still needed from your wallet for each play.</p>
         </Modal>
@@ -89,13 +95,13 @@ export default function Header() {
         <Modal onClose={() => setJackpotHelp(false)}>
           <h1>Jackpot 💰</h1>
           <p style={{ fontWeight: 'bold' }}>
-            There&apos;s <TokenValue amount={pool.jackpotBalance} /> in the Jackpot.
+            There's <TokenValue amount={pool.jackpotBalance} /> in the Jackpot.
           </p>
           <p>
-            The Jackpot is a prize pool that grows with every bet made. As the Jackpot grows, so does your chance of winning. Once a winner is selected, the value of the Jackpot resets and grows from there until a new winner is selected.
+            The Jackpot grows with every bet made. Once a winner is selected, it resets and starts over.
           </p>
           <p>
-            You will be paying a maximum of {(PLATFORM_JACKPOT_FEE * 100).toLocaleString(undefined, { maximumFractionDigits: 4 })}% for each wager for a chance to win.
+            You'll pay a max of {(PLATFORM_JACKPOT_FEE * 100).toFixed(2)}% per bet for a chance to win.
           </p>
           <label style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             {context.defaultJackpotFee === 0 ? 'DISABLED' : 'ENABLED'}
@@ -125,7 +131,7 @@ export default function Header() {
           )}
           <TokenSelect />
           <button
-            onClick={() => setConnectOpen(true)}
+            onClick={() => !publicKey ? setConnectOpen(true) : null}
             style={{
               padding: '6px 16px',
               borderRadius: 8,
@@ -133,9 +139,11 @@ export default function Header() {
               color: '#003c00',
               fontWeight: 'bold',
               cursor: 'pointer',
+              minWidth: 120,
+              textAlign: 'center',
             }}
           >
-            Connect
+            {shortAddress || 'Connect'}
           </button>
         </div>
       </StyledHeader>
