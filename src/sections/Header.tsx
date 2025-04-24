@@ -11,7 +11,8 @@ import styled from 'styled-components'
 import { PLATFORM_JACKPOT_FEE } from '../constants'
 import TokenSelect from './TokenSelect'
 import { Icon } from '../components/Icon'
-import ConnectModal from '../components/ConnectModal' // <- použije tvoj moderný komponent
+import ConnectModal from '../components/ConnectModal'
+import { useWalletModal } from '@solana/wallet-adapter-react-ui'
 
 const Bonus = styled.button`
   all: unset;
@@ -61,6 +62,7 @@ export default function Header() {
   const [bonusHelp, setBonusHelp] = React.useState(false)
   const [jackpotHelp, setJackpotHelp] = React.useState(false)
   const [connectOpen, setConnectOpen] = React.useState(false)
+  const walletModal = useWalletModal()
 
   const handleConnectSelect = (method: string) => {
     setConnectOpen(false)
@@ -68,8 +70,7 @@ export default function Header() {
       console.log('Twitter login')
       // tu môžeš spustiť login flow
     } else if (method === 'wallet') {
-      console.log('Wallet connect')
-      // tu môžeš otvoriť wallet modal
+      walletModal.setVisible(true)
     }
   }
 
