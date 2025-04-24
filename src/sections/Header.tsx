@@ -11,10 +11,9 @@ import styled from 'styled-components'
 import { PLATFORM_JACKPOT_FEE } from '../constants'
 import TokenSelect from './TokenSelect'
 import ConnectModal from '../components/ConnectModal'
-- import { useWalletModal, useWallet } from '@solana/wallet-adapter-react-ui'
-+ import { useWalletModal } from '@solana/wallet-adapter-react-ui'
-+ import { useWallet } from '@solana/wallet-adapter-react'
-import Modal from '../components/Modal'
+import { useWalletModal } from '@solana/wallet-adapter-react-ui'
+import { useWallet }      from '@solana/wallet-adapter-react'
+import Modal              from '../components/Modal'
 
 const Bonus = styled.button`
   all: unset;
@@ -71,14 +70,14 @@ export default function Header() {
     setConnectOpen(false)
     if (method === 'twitter') {
       console.log('Twitter login')
-      // TODO: Integruj Twitter OAuth login flow
+      // TODO: integruj Twitter OAuth flow
     } else if (method === 'wallet') {
       walletModal.setVisible(true)
     }
   }
 
   const shortAddress = publicKey
-    ? `${publicKey.toBase58().slice(0, 4)}...${publicKey.toBase58().slice(-4)}`
+    ? `${publicKey.toBase58().slice(0, 4)}…${publicKey.toBase58().slice(-4)}`
     : null
 
   return (
@@ -133,7 +132,7 @@ export default function Header() {
           )}
           <TokenSelect />
           <button
-            onClick={() => !publicKey ? setConnectOpen(true) : null}
+            onClick={() => !publicKey && setConnectOpen(true)}
             style={{
               padding: '6px 16px',
               borderRadius: 8,
