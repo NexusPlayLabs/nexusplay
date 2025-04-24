@@ -14,11 +14,8 @@ const StyledModal = styled.div`
   }
 
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(21, 21, 31, 0.95); // tmavšie a menej priesvitné
+  inset: 0;
+  background: rgba(21, 21, 31, 0.95);
   z-index: 100;
   overflow-y: auto;
   height: 100vh;
@@ -27,13 +24,13 @@ const StyledModal = styled.div`
 
 const Container = styled.div`
   display: flex;
-  padding: 20px;
-  min-height: 100vh;
   align-items: center;
   justify-content: center;
+  min-height: 100vh;
+  padding: 0;
 
   @media (max-width: 480px) {
-    padding: 12px;
+    padding: 0;
   }
 `
 
@@ -54,6 +51,7 @@ const Wrapper = styled.div`
   background: #15151f;
   border-radius: 10px;
   padding-bottom: 20px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
   animation: wrapper-appear2 0.3s;
   color: white;
 `
