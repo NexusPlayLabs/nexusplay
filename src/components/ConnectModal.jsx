@@ -96,7 +96,7 @@ export default function ConnectModal({ isOpen, onClose, onSelect }) {
           Connect Twitter
         </ConnectButton>
         <Info>
-          You only need to connect one to fully access the site.
+          Twitter connection is optional. You can still use the site without it.
         </Info>
       </ModalContainer>
     </Modal>
