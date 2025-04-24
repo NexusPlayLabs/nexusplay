@@ -12,8 +12,8 @@ import { PLATFORM_JACKPOT_FEE } from '../constants'
 import TokenSelect from './TokenSelect'
 import ConnectModal from '../components/ConnectModal'
 import { useWalletModal } from '@solana/wallet-adapter-react-ui'
-import { useWallet } from '@solana/wallet-adapter-react'
-import { Modal } from '../components/Modal'
+import { useWallet }      from '@solana/wallet-adapter-react'
+import { Modal }          from '../components/Modal'
 
 const Bonus = styled.button`
   all: unset;
@@ -70,7 +70,7 @@ export default function Header() {
     setConnectOpen(false)
     if (method === 'twitter') {
       console.log('Twitter login')
-      // TODO: Integruj Twitter OAuth flow
+      // TODO: integruj Twitter OAuth flow
     } else if (method === 'wallet') {
       walletModal.setVisible(true)
     }
