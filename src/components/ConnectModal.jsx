@@ -185,7 +185,7 @@ export default function ConnectModal({
         )}
 
         <Info>
-          Pripojenie cez Twitter je voliteľné, ale pripojenie peňaženky je nevyhnutné pre plnú funkčnosť.
+          Twitter connection is optional, but a wallet connection is required for full functionality.
         </Info>
       </Container>
     </Modal>
