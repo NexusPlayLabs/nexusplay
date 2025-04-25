@@ -113,14 +113,14 @@ export default function ConnectModal({
 
         {selectingWallet ? (
           <>
-            <ConnectButton onClick={() => setSelectedWallet('phantom')}>
-              <img src="/phantom.webp" alt="Phantom" />
-              Phantom
-            </ConnectButton>
-
             <ConnectButton onClick={() => setSelectedWallet('solflare')}>
               <img src="/solflare.svg" alt="Solflare" />
               Solflare
+            </ConnectButton>
+
+             <ConnectButton onClick={() => setSelectedWallet('phantom')}>
+              <img src="/phantom.webp" alt="Phantom" />
+              Phantom
             </ConnectButton>
 
             <ConnectButton onClick={() => setSelectedWallet('subwallet')}>
