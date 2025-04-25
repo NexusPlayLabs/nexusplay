@@ -112,32 +112,34 @@ export default function ConnectModal({
         <Title>Connect</Title>
 
         {selectingWallet ? (
-          <>
-            <ConnectButton onClick={() => setSelectedWallet('phantom')}>
-              <img src="/phantom.webp" alt="Phantom" />
-              Phantom
-            </ConnectButton>
-
-            <ConnectButton onClick={() => setSelectedWallet('solflare')}>
-              <img src="/solflare.svg" alt="Solflare" />
-              Solflare
-            </ConnectButton>
-
-            <ConnectButton onClick={() => setSelectedWallet('subwallet')}>
-              <img src="/subwallet.jpeg" alt="SubWallet" />
-              SubWallet
-            </ConnectButton>
-
-            <ConnectButton
-              bg="#555"
-              text="#aaa"
-              disabled
-            >
-              <img src="/metamask.png" alt="MetaMask" />
-              MetaMask (not supported)
-            </ConnectButton>
-          </>
-        ) : twitterConnected ? (
+            <>
+              <ConnectButton onClick={() => setSelectedWallet('solflare')}>
+                <img src="/solflare.svg" alt="Solflare" />
+                Solflare
+              </ConnectButton>
+          
+              <ConnectButton onClick={() => setSelectedWallet('phantom')}>
+                <img src="/phantom.webp" alt="Phantom" />
+                Phantom
+              </ConnectButton>
+          
+              <ConnectButton onClick={() => setSelectedWallet('subwallet')}>
+                <img
+                  src="/subwallet.jpeg"
+                  alt="SubWallet"
+                  style={{ borderRadius: 4 }}
+                />
+                SubWallet
+              </ConnectButton>
+          
+              {isMobile && (
+                <ConnectButton bg="#555" text="#aaa" disabled>
+                  <img src="/metamask.png" alt="MetaMask" />
+                  MetaMask (not supported)
+                </ConnectButton>
+              )}
+            </>
+          ) : twitterConnected ? (
           <>
             <Info>
               Twitter pripojený ako <b>{twitterUser}</b>
