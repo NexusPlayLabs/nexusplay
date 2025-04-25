@@ -55,7 +55,7 @@ const ConnectButton = styled.button`
   font-size: 16px;
   width: 100%;
   max-width: 280px;
-  cursor: ${(p) => (p.disabled ? 'not-allowed' : 'pointer')};
+  cursor: ${(p) => (p.disabled ? 'not-allowed' : 'pointer')};  /* Správny kurzor pre klikateľný element */
   display: flex;
   align-items: center;
   gap: 12px;
@@ -179,7 +179,7 @@ export default function ConnectModal({
               }}
             >
               <img src="/wallet_logo.png" alt="Peňaženka" />
-              Pripojiť peňaženku
+              Connect
             </ConnectButton>
           </>
         )}
