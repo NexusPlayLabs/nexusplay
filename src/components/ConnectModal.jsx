@@ -109,7 +109,7 @@ export default function ConnectModal({
   return (
     <Modal onClose={onClose}>
       <Container>
-        <Title>Pripojiť</Title>
+        <Title>Connect</Title>
 
         {selectingWallet ? (
           <>
@@ -135,7 +135,7 @@ export default function ConnectModal({
             {isMobile && (
               <ConnectButton bg="#555" text="#aaa" disabled>
                 <img src="/metamask.png" alt="MetaMask" />
-                MetaMask (nie je podporované)
+                MetaMask (is not supported)
               </ConnectButton>
             )}
           </>
@@ -155,7 +155,7 @@ export default function ConnectModal({
               }}
             >
               <img src="/wallet_logo.png" alt="Peňaženka" />
-              Pripojiť peňaženku
+              Connect wallet
             </ConnectButton>
           </>
         ) : (
@@ -166,7 +166,7 @@ export default function ConnectModal({
               onClick={() => onSelect('twitter')}
             >
               <img src="/twitter_logo.png" alt="Twitter" />
-              Pripojiť Twitter
+              Connect Twitter
             </ConnectButton>
             <ConnectButton
               bg="#00FFA3"
