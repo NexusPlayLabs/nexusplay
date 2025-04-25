@@ -112,37 +112,37 @@ export default function ConnectModal({
         <Title>Connect</Title>
 
         {selectingWallet ? (
-          <>
-            <ConnectButton onClick={() => setSelectedWallet('solflare')}>
-              <img src="/solflare.svg" alt="Solflare" />
-              Solflare
-            </ConnectButton>
-
-            <ConnectButton onClick={() => setSelectedWallet('phantom')}>
-              <img src="/phantom.webp" alt="Phantom" />
-              Phantom
-            </ConnectButton>
-
-            <ConnectButton onClick={() => setSelectedWallet('subwallet')}>
-              <img
-                src="/subwallet.jpeg"
-                alt="SubWallet"
-                style={{ borderRadius: 4 }}
-              />
-              SubWallet
-            </ConnectButton>
-
-            {isMobile && (
-              <ConnectButton bg="#555" text="#aaa" disabled>
-                <img src="/metamask.png" alt="MetaMask" />
-                MetaMask (not supported)
+            <>
+              <ConnectButton onClick={() => setSelectedWallet('solflare')}>
+                <img src="/solflare.svg" alt="Solflare" />
+                Solflare
               </ConnectButton>
-            )}
-          </>
-        ) : twitterConnected ? (
+          
+              <ConnectButton onClick={() => setSelectedWallet('phantom')}>
+                <img src="/phantom.webp" alt="Phantom" />
+                Phantom
+              </ConnectButton>
+          
+              <ConnectButton onClick={() => setSelectedWallet('subwallet')}>
+                <img
+                  src="/subwallet.jpeg"
+                  alt="SubWallet"
+                  style={{ borderRadius: 4 }}
+                />
+                SubWallet
+              </ConnectButton>
+          
+              {isMobile && (
+                <ConnectButton bg="#555" text="#aaa" disabled>
+                  <img src="/metamask.png" alt="MetaMask" />
+                  MetaMask (not supported)
+                </ConnectButton>
+              )}
+            </>
+          ) : twitterConnected ? (
           <>
             <Info>
-              Twitter connected as <b>{twitterUser}</b>
+              Twitter pripojený ako <b>{twitterUser}</b>
             </Info>
             <ConnectButton
               bg="#00FFA3"
@@ -155,7 +155,7 @@ export default function ConnectModal({
               }}
             >
               <img src="/wallet_logo.png" alt="Wallet" />
-              Connect wallet
+              Connect Wallet
             </ConnectButton>
           </>
         ) : (
@@ -169,7 +169,7 @@ export default function ConnectModal({
               Connect Twitter
             </ConnectButton>
             <ConnectButton
-              bg="#03ffa4"  /* Pôvodná farba */
+              bg="#00FFA3"
               onClick={() => {
                 if (isMobile) {
                   setSelectingWallet(true)
