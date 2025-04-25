@@ -67,7 +67,7 @@ const ConnectButton = styled.button`
   &:hover {
     background: ${(p) => (p.disabled ? p.bg : '#02e294')};
     box-shadow: ${(p) =>
-      p.disabled ? 'none' : '0 0 18px rgba(3, 255, 164, 0.5)'};
+      p.disabled ? 'none' : '0 0 18px rgba(3, 255, 164, 0.5)'}; 
   }
 
   & img {
