@@ -45,7 +45,7 @@ const Info = styled.p`
 `
 
 const ConnectButton = styled.button`
-  background: ${(p) => p.bg || '#03ffa4'};  /* Neonová zelená */
+  background: ${(p) => p.bg || '#03ffa4'};
   color: ${(p) => p.text || '#000'};
   font-weight: bold;
   border: 2px solid ${(p) => p.bg || '#03ffa4'};
@@ -67,7 +67,7 @@ const ConnectButton = styled.button`
   &:hover {
     background: ${(p) => (p.disabled ? p.bg : '#02e294')};
     box-shadow: ${(p) =>
-      p.disabled ? 'none' : '0 0 18px rgba(3, 255, 164, 0.5)'}; 
+      p.disabled ? 'none' : '0 0 18px rgba(3, 255, 164, 0.5)'};
   }
 
   & img {
