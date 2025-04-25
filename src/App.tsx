@@ -1,15 +1,15 @@
-import React from 'react'
-import { Route, Routes, useLocation } from 'react-router-dom'
 import { useWalletModal } from '@solana/wallet-adapter-react-ui'
 import { GambaUi } from 'gamba-react-ui-v2'
 import { useTransactionError } from 'gamba-react-v2'
+import React from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import { Modal } from './components/Modal'
 import { TOS_HTML } from './constants'
 import { useToast } from './hooks/useToast'
 import { useUserStore } from './hooks/useUserStore'
-import Header from './sections/Header'
 import Dashboard from './sections/Dashboard/Dashboard'
 import Game from './sections/Game/Game'
+import Header from './sections/Header'
 import RecentPlays from './sections/RecentPlays/RecentPlays'
 import Toasts from './sections/Toasts'
 import { MainWrapper, TosInner, TosWrapper } from './styles'
@@ -23,26 +23,33 @@ function ScrollToTop() {
 function ErrorHandler() {
   const walletModal = useWalletModal()
   const toast = useToast()
+  const [error, setError] = React.useState<Error>()
 
-  React.useEffect(() => {
-    return useTransactionError((err) => {
-      if (err.message === 'NOT_CONNECTED') {
+  useTransactionError(
+    (error) => {
+      if (error.message === 'NOT_CONNECTED') {
         walletModal.setVisible(true)
-      } else {
-        toast({
-          title: '❌ Transaction error',
-          description: err.error?.errorMessage ?? err.message,
-        })
+        return
       }
-    })
-  }, [])
+      toast({ title: '❌ Transaction error', description: error.error?.errorMessage ?? error.message })
+    },
+  )
 
-  return null
+  return (
+    <>
+      {error && (
+        <Modal onClose={() => setError(undefined)}>
+          <h1>Error occured</h1>
+          <p>{error.message}</p>
+        </Modal>
+      )}
+    </>
+  )
 }
 
 export default function App() {
-  const newcomer = useUserStore((s) => s.newcomer)
-  const set = useUserStore((s) => s.set)
+  const newcomer = useUserStore((state) => state.newcomer)
+  const set = useUserStore((state) => state.set)
 
   return (
     <>
@@ -52,7 +59,9 @@ export default function App() {
           <TosWrapper>
             <TosInner dangerouslySetInnerHTML={{ __html: TOS_HTML }} />
           </TosWrapper>
-          <p>Play responsibly.</p>
+          <p>
+            By playing on our platform, you confirm your compliance.
+          </p>
           <GambaUi.Button main onClick={() => set({ newcomer: false })}>
             Acknowledge
           </GambaUi.Button>
