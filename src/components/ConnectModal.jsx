@@ -109,37 +109,37 @@ export default function ConnectModal({
   return (
     <Modal onClose={onClose}>
       <Container>
-        <Title>Connect</Title>
+        <Title>Pripojiť</Title>
 
         {selectingWallet ? (
-            <>
-              <ConnectButton onClick={() => setSelectedWallet('solflare')}>
-                <img src="/solflare.svg" alt="Solflare" />
-                Solflare
+          <>
+            <ConnectButton onClick={() => setSelectedWallet('solflare')}>
+              <img src="/solflare.svg" alt="Solflare" />
+              Solflare
+            </ConnectButton>
+
+            <ConnectButton onClick={() => setSelectedWallet('phantom')}>
+              <img src="/phantom.webp" alt="Phantom" />
+              Phantom
+            </ConnectButton>
+
+            <ConnectButton onClick={() => setSelectedWallet('subwallet')}>
+              <img
+                src="/subwallet.jpeg"
+                alt="SubWallet"
+                style={{ borderRadius: 4 }}
+              />
+              SubWallet
+            </ConnectButton>
+
+            {isMobile && (
+              <ConnectButton bg="#555" text="#aaa" disabled>
+                <img src="/metamask.png" alt="MetaMask" />
+                MetaMask (nie je podporované)
               </ConnectButton>
-          
-              <ConnectButton onClick={() => setSelectedWallet('phantom')}>
-                <img src="/phantom.webp" alt="Phantom" />
-                Phantom
-              </ConnectButton>
-          
-              <ConnectButton onClick={() => setSelectedWallet('subwallet')}>
-                <img
-                  src="/subwallet.jpeg"
-                  alt="SubWallet"
-                  style={{ borderRadius: 4 }}
-                />
-                SubWallet
-              </ConnectButton>
-          
-              {isMobile && (
-                <ConnectButton bg="#555" text="#aaa" disabled>
-                  <img src="/metamask.png" alt="MetaMask" />
-                  MetaMask (not supported)
-                </ConnectButton>
-              )}
-            </>
-          ) : twitterConnected ? (
+            )}
+          </>
+        ) : twitterConnected ? (
           <>
             <Info>
               Twitter pripojený ako <b>{twitterUser}</b>
@@ -154,8 +154,8 @@ export default function ConnectModal({
                 }
               }}
             >
-              <img src="/wallet_logo.png" alt="Wallet" />
-              Connect Wallet
+              <img src="/wallet_logo.png" alt="Peňaženka" />
+              Pripojiť peňaženku
             </ConnectButton>
           </>
         ) : (
@@ -166,7 +166,7 @@ export default function ConnectModal({
               onClick={() => onSelect('twitter')}
             >
               <img src="/twitter_logo.png" alt="Twitter" />
-              Connect Twitter
+              Pripojiť Twitter
             </ConnectButton>
             <ConnectButton
               bg="#00FFA3"
@@ -178,14 +178,14 @@ export default function ConnectModal({
                 }
               }}
             >
-              <img src="/wallet_logo.png" alt="Wallet" />
-              Connect Wallet
+              <img src="/wallet_logo.png" alt="Peňaženka" />
+              Pripojiť peňaženku
             </ConnectButton>
           </>
         )}
 
         <Info>
-          Twitter connection is optional, but a wallet connection is required for full functionality.
+          Pripojenie cez Twitter je voliteľné, ale pripojenie peňaženky je nevyhnutné pre plnú funkčnosť.
         </Info>
       </Container>
     </Modal>
