@@ -99,9 +99,11 @@ export default function ConnectModal({
   useEffect(() => {
     if (isMobile && selectedWallet) {
       const deeplink = WALLET_DEEPLINKS[selectedWallet]
-      if (deeplink) window.location.href = deeplink
+      if (deeplink) {
+        window.location.href = deeplink
+      }
     }
-  }, [selectedWallet, isMobile])
+  }, [isMobile, selectedWallet])
 
   if (!isOpen) return null
 
@@ -127,10 +129,12 @@ export default function ConnectModal({
           </>
         ) : twitterConnected ? (
           <>
-            <Info>Twitter pripojený ako <b>{twitterUser}</b></Info>
+            <Info>
+              Twitter pripojený ako <b>{twitterUser}</b>
+            </Info>
             <ConnectButton
               bg="#00FFA3"
-              onClick={() => isMobile ? setSelectingWallet(true) : onSelect('wallet')}
+              onClick={() => (isMobile ? setSelectingWallet(true) : onSelect('wallet'))}
             >
               <img src="/wallet_logo.png" alt="Wallet" /> Connect Wallet
             </ConnectButton>
@@ -142,14 +146,16 @@ export default function ConnectModal({
             </ConnectButton>
             <ConnectButton
               bg="#00FFA3"
-              onClick={() => isMobile ? setSelectingWallet(true) : onSelect('wallet')}
+              onClick={() => (isMobile ? setSelectingWallet(true) : onSelect('wallet'))}
             >
               <img src="/wallet_logo.png" alt="Wallet" /> Connect Wallet
             </ConnectButton>
           </>
         )}
 
-        <Info>Twitter connection is optional, but a wallet connection is required for full functionality.</Info>
+        <Info>
+          Twitter connection is optional, but a wallet connection is required for full functionality.
+        </Info>
       </Container>
     </Modal>
   )
