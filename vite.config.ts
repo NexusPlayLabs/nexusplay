@@ -15,6 +15,9 @@ export default defineConfig(() => ({
       crypto: 'crypto-browserify',
     },
   },
+  optimizeDeps: {
+    include: ['bs58'],
+  },
   plugins: [
     react({ jsxRuntime: 'classic' }),
   ],
