@@ -89,7 +89,7 @@ export default function ConnectModal({
   onClose,
   onSelect,
   twitterConnected,
-  twitterUser
+  twitterUser,
 }) {
   const [selectingWallet, setSelectingWallet] = useState(false)
   const [selectedWallet, setSelectedWallet] = useState(null)
@@ -134,19 +134,27 @@ export default function ConnectModal({
             </Info>
             <ConnectButton
               bg="#00FFA3"
-              onClick={() => (isMobile ? setSelectingWallet(true) : onSelect('wallet'))}
+              onClick={() =>
+                isMobile ? setSelectingWallet(true) : onSelect('wallet')
+              }
             >
               <img src="/wallet_logo.png" alt="Wallet" /> Connect Wallet
             </ConnectButton>
           </>
         ) : (
           <>
-            <ConnectButton bg="#1DA1F2" text="#fff" onClick={() => onSelect('twitter')}>
+            <ConnectButton
+              bg="#1DA1F2"
+              text="#fff"
+              onClick={() => onSelect('twitter')}
+            >
               <img src="/twitter_logo.png" alt="Twitter" /> Connect Twitter
             </ConnectButton>
             <ConnectButton
               bg="#00FFA3"
-              onClick={() => (isMobile ? setSelectingWallet(true) : onSelect('wallet'))}
+              onClick={() =>
+                isMobile ? setSelectingWallet(true) : onSelect('wallet')
+              }
             >
               <img src="/wallet_logo.png" alt="Wallet" /> Connect Wallet
             </ConnectButton>
@@ -154,7 +162,8 @@ export default function ConnectModal({
         )}
 
         <Info>
-          Twitter connection is optional, but a wallet connection is required for full functionality.
+          Twitter connection is optional, but a wallet connection is required
+          for full functionality.
         </Info>
       </Container>
     </Modal>
