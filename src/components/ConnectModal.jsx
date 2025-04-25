@@ -124,7 +124,7 @@ export default function ConnectModal({
             </ConnectButton>
 
             <ConnectButton onClick={() => setSelectedWallet('subwallet')}>
-              <img src="/subwallet.jpeg" alt="SubWallet" />
+              <img src="/subwallet.jpeg" alt="SubWallet" style={{ borderRadius: '6px' }} />
               SubWallet
             </ConnectButton>
 
