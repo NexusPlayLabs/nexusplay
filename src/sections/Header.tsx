@@ -148,13 +148,10 @@ export default function Header() {
           </button>
         </div>
       </StyledHeader>
-
       <ConnectModal
         isOpen={connectOpen}
         onClose={() => setConnectOpen(false)}
         onSelect={handleConnectSelect}
-        twitterConnected={!!publicKey}
-        twitterUser={shortAddress}
       />
     </>
   )
