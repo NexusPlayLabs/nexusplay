@@ -55,7 +55,7 @@ const ConnectButton = styled.button`
   font-size: 16px;
   width: 100%;
   max-width: 280px;
-  cursor: ${(p) => (p.disabled ? 'not-allowed' : 'pointer')};  /* Správny kurzor pre klikateľný element */
+  cursor: ${(p) => (p.disabled ? 'not-allowed' : 'pointer')};
   display: flex;
   align-items: center;
   gap: 12px;
@@ -67,7 +67,7 @@ const ConnectButton = styled.button`
   &:hover {
     background: ${(p) => (p.disabled ? p.bg : '#02e294')};
     box-shadow: ${(p) =>
-      p.disabled ? 'none' : '0 0 18px rgba(3, 255, 164, 0.5)'}; 
+      p.disabled ? 'none' : '0 0 18px rgba(3, 255, 164, 0.5)'};
   }
 
   & img {
