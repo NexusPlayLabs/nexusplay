@@ -48,7 +48,11 @@ const Logo = styled(NavLink)`
   width: 100%;
   max-width: 200px;
   margin: 0 10px;
-  & > img { width: 100%; height: auto; }
+
+  & > img {
+    width: 100%;
+    height: auto;
+  }
 `
 
 export default function Header() {
@@ -76,9 +80,46 @@ export default function Header() {
 
   return (
     <>
-      {/* Bonus modaly, ErrorHandler atď. */}
+      {/* Bonus Modal */}
+      {bonusHelp && (
+        <Modal onClose={() => setBonusHelp(false)}>
+          <h1>Bonus ✨</h1>
+          <p>
+            Máš <b><TokenValue amount={balance.bonusBalance} /></b> zadarmo.
+            Tento bonus sa automaticky použije pri hre.
+          </p>
+          <p>Poznámka: Na transakciu je stále potrebný poplatok z peňaženky.</p>
+        </Modal>
+      )}
+
+      {/* Jackpot Modal */}
+      {jackpotHelp && (
+        <Modal onClose={() => setJackpotHelp(false)}>
+          <h1>Jackpot 💰</h1>
+          <p style={{ fontWeight: 'bold' }}>
+            V jackpot-e je <TokenValue amount={pool.jackpotBalance} />.
+          </p>
+          <p>Jackpot rastie s každou stávkou a po výhře sa resetuje.</p>
+          <p>
+            Maximálny poplatok na stávku: {(PLATFORM_JACKPOT_FEE * 100).toFixed(2)}%
+          </p>
+          <label style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            {context.defaultJackpotFee === 0 ? 'VYPNUTÉ' : 'ZAPNUTÉ'}
+            <GambaUi.Switch
+              checked={context.defaultJackpotFee > 0}
+              onChange={(checked) =>
+                context.setDefaultJackpotFee(checked ? PLATFORM_JACKPOT_FEE : 0)
+              }
+            />
+          </label>
+        </Modal>
+      )}
+
       <StyledHeader>
-        <Logo to="/"><img src="/logo_casino.png" alt="Logo"/></Logo>
+        <Logo to="/">
+          <img src="/logo_casino.png" alt="NexusPlay logo" />
+        </Logo>
+
         <div style={{ display:'flex', gap:10, alignItems:'center' }}>
           {pool.jackpotBalance > 0 && (
             <Bonus onClick={() => setJackpotHelp(true)}>
@@ -90,19 +131,30 @@ export default function Header() {
               ✨ <TokenValue amount={balance.bonusBalance} />
             </Bonus>
           )}
+
           <TokenSelect />
+
           <button
             onClick={() => !publicKey && setConnectOpen(true)}
-            style={{ padding:'6px 16px', borderRadius:8, background:'#03ffa4', color:'#003c00', fontWeight:'bold' }}
+            style={{
+              padding: '6px 16px',
+              borderRadius: 8,
+              background: '#03ffa4',
+              color: '#003c00',
+              fontWeight: 'bold',
+            }}
           >
             {shortAddress || 'Connect'}
           </button>
         </div>
       </StyledHeader>
+
       <ConnectModal
         isOpen={connectOpen}
         onClose={() => setConnectOpen(false)}
         onSelect={handleConnectSelect}
+        twitterConnected={false /* alebo tvoj stav */}
+        twitterUser={undefined /* alebo tvoj stav */}
       />
     </>
   )
