@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Modal } from './Modal'
 
-const Container = styled.div
+const Container = styled.div`
   padding: 30px 20px;
   background: #1a1a1a;
   border-radius: 16px;
@@ -17,9 +17,9 @@ const Container = styled.div
     max-width: 90vw;
     border-radius: 12px;
   }
+`
 
-
-const Title = styled.h2
+const Title = styled.h2`
   color: #fff;
   font-size: 28px;
   margin-bottom: 24px;
@@ -29,9 +29,9 @@ const Title = styled.h2
     font-size: 22px;
     margin-bottom: 20px;
   }
+`
 
-
-const Info = styled.p
+const Info = styled.p`
   color: #888;
   font-size: 14px;
   margin-top: 24px;
@@ -42,9 +42,9 @@ const Info = styled.p
     font-size: 13px;
     margin-top: 20px;
   }
+`
 
-
-const ConnectButton = styled.button
+const ConnectButton = styled.button`
   background: ${(p) => p.bg || '#03ffa4'};
   color: ${(p) => p.text || '#000'};
   font-weight: bold;
@@ -74,8 +74,9 @@ const ConnectButton = styled.button
   & img {
     width: 20px;
     height: 20px;
+    border-radius: 6px;
   }
-
+`
 
 const WALLET_DEEPLINKS = {
   phantom: 'https://phantom.app/ul/browse/https://www.nexusplay.fun',
@@ -98,11 +99,9 @@ export default function ConnectModal({
   useEffect(() => {
     if (isMobile && selectedWallet) {
       const deeplink = WALLET_DEEPLINKS[selectedWallet]
-      if (deeplink) {
-        window.location.href = deeplink
-      }
+      if (deeplink) window.location.href = deeplink
     }
-  }, [selectedWallet])
+  }, [selectedWallet, isMobile])
 
   if (!isOpen) return null
 
@@ -113,80 +112,44 @@ export default function ConnectModal({
 
         {selectingWallet ? (
           <>
+            <ConnectButton onClick={() => setSelectedWallet('phantom')}>
+              <img src="/phantom.webp" alt="Phantom" /> Phantom
+            </ConnectButton>
             <ConnectButton onClick={() => setSelectedWallet('solflare')}>
-              <img src="/solflare.svg" alt="Solflare" />
-              Solflare
+              <img src="/solflare.svg" alt="Solflare" /> Solflare
             </ConnectButton>
-
-             <ConnectButton onClick={() => setSelectedWallet('phantom')}>
-              <img src="/phantom.webp" alt="Phantom" />
-              Phantom
-            </ConnectButton>
-
             <ConnectButton onClick={() => setSelectedWallet('subwallet')}>
-              <img src="/subwallet.jpeg" alt="SubWallet" style={{ borderRadius: '6px' }} />
-              SubWallet
+              <img src="/subwallet.jpeg" alt="SubWallet" /> SubWallet
             </ConnectButton>
-
-            <ConnectButton
-              bg="#333"
-              text="#aaa"
-              border="#444"
-              disabled
-            >
-              <img src="/metamask.png" alt="MetaMask" />
-              MetaMask (Not Supported)
+            <ConnectButton bg="#333" text="#aaa" border="#444" disabled>
+              <img src="/metamask.png" alt="MetaMask" /> MetaMask (Not Supported)
             </ConnectButton>
           </>
         ) : twitterConnected ? (
           <>
-            <Info>
-              Twitter pripojený ako <b>{twitterUser}</b>
-            </Info>
+            <Info>Twitter pripojený ako <b>{twitterUser}</b></Info>
             <ConnectButton
               bg="#00FFA3"
-              onClick={() => {
-                if (isMobile) {
-                  setSelectingWallet(true)
-                } else {
-                  onSelect('wallet')
-                }
-              }}
+              onClick={() => isMobile ? setSelectingWallet(true) : onSelect('wallet')}
             >
-              <img src="/wallet_logo.png" alt="Wallet" />
-              Connect Wallet
+              <img src="/wallet_logo.png" alt="Wallet" /> Connect Wallet
             </ConnectButton>
           </>
         ) : (
           <>
-            <ConnectButton
-              bg="#1DA1F2"
-              text="#fff"
-              onClick={() => onSelect('twitter')}
-            >
-              <img src="/twitter_logo.png" alt="Twitter" />
-              Connect Twitter
+            <ConnectButton bg="#1DA1F2" text="#fff" onClick={() => onSelect('twitter')}>
+              <img src="/twitter_logo.png" alt="Twitter" /> Connect Twitter
             </ConnectButton>
             <ConnectButton
               bg="#00FFA3"
-              onClick={() => {
-                if (isMobile) {
-                  setSelectingWallet(true)
-                } else {
-                  onSelect('wallet')
-                }
-              }}
+              onClick={() => isMobile ? setSelectingWallet(true) : onSelect('wallet')}
             >
-              <img src="/wallet_logo.png" alt="Wallet" />
-              Connect Wallet
+              <img src="/wallet_logo.png" alt="Wallet" /> Connect Wallet
             </ConnectButton>
           </>
         )}
 
-        <Info>
-          Twitter connection is optional, but a wallet connection is required
-          for full functionality.
-        </Info>
+        <Info>Twitter connection is optional, but a wallet connection is required for full functionality.</Info>
       </Container>
     </Modal>
   )
