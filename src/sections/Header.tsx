@@ -134,16 +134,17 @@ export default function Header() {
           <button
             onClick={() => !publicKey && setConnectOpen(true)}
             style={{
-              padding: '10px 20px',
-              backgroundColor: publicKey ? '#03ffa4' : '#1DA1F2',  // Neonová zelená keď pripojená
-              color: '#fff',
-              border: 'none',
-              cursor: publicKey ? 'pointer' : 'not-allowed',
+              padding: '6px 16px',
+              borderRadius: 8,
+              background: '#03ffa4',
+              color: '#003c00',
               fontWeight: 'bold',
-              borderRadius: '10px',
+              cursor: 'pointer',
+              minWidth: 120,
+              textAlign: 'center',
             }}
           >
-            {publicKey ? 'Wallet Connected' : 'Connect Wallet'}  {/* Anglický text */}
+            {shortAddress || 'Connect'}
           </button>
         </div>
       </StyledHeader>
