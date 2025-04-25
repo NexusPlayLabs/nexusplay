@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Modal } from './Modal'
-import { Keypair } from '@solana/web3.js'
-import bs58 from 'bs58'
 
-const Container = styled.div`
+const Container = styled.div
   padding: 30px 20px;
   background: #1a1a1a;
   border-radius: 16px;
@@ -19,9 +17,9 @@ const Container = styled.div`
     max-width: 90vw;
     border-radius: 12px;
   }
-`
 
-const Title = styled.h2`
+
+const Title = styled.h2
   color: #fff;
   font-size: 28px;
   margin-bottom: 24px;
@@ -31,9 +29,9 @@ const Title = styled.h2`
     font-size: 22px;
     margin-bottom: 20px;
   }
-`
 
-const Info = styled.p`
+
+const Info = styled.p
   color: #888;
   font-size: 14px;
   margin-top: 24px;
@@ -44,9 +42,9 @@ const Info = styled.p`
     font-size: 13px;
     margin-top: 20px;
   }
-`
 
-const ConnectButton = styled.button`
+
+const ConnectButton = styled.button
   background: ${(p) => p.bg || '#03ffa4'};
   color: ${(p) => p.text || '#000'};
   font-weight: bold;
@@ -76,9 +74,14 @@ const ConnectButton = styled.button`
   & img {
     width: 20px;
     height: 20px;
-    border-radius: 6px;
   }
-`
+
+
+const WALLET_DEEPLINKS = {
+  phantom: 'https://phantom.app/ul/browse/https://www.nexusplay.fun',
+  solflare: 'https://solflare.com/ul/v1/connect?redirect=https://www.nexusplay.fun',
+  subwallet: 'subwallet://dapp?url=https://www.nexusplay.fun',
+}
 
 export default function ConnectModal({
   isOpen,
@@ -88,43 +91,18 @@ export default function ConnectModal({
   twitterUser
 }) {
   const [selectingWallet, setSelectingWallet] = useState(false)
-  const [selectedWallet, setSelectedWallet] = useState<string|null>(null)
-
-  // generate a DApp keypair once
-  const [dappKeypair] = useState(() => Keypair.generate())
+  const [selectedWallet, setSelectedWallet] = useState(null)
 
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
 
   useEffect(() => {
     if (isMobile && selectedWallet) {
-      let url = ''
-      const origin = window.location.origin
-      const encKey = bs58.encode(dappKeypair.publicKey.toBytes())
-
-      if (selectedWallet === 'phantom') {
-        const params = new URLSearchParams({
-          dapp_encryption_public_key: encKey,
-          cluster: 'mainnet-beta',
-          app_url: origin,
-          redirect_link: origin,
-        })
-        url = `https://phantom.app/ul/v1/connect?${params}`
-      } else if (selectedWallet === 'solflare') {
-        const params = new URLSearchParams({
-          app_url: origin,
-          redirect: origin,
-          dapp_key: encKey,
-        })
-        url = `https://solflare.com/ul/v1/connect?${params}`
-      } else if (selectedWallet === 'subwallet') {
-        url = `subwallet://dapp?url=${origin}`
-      }
-
-      if (url) {
-        window.location.href = url
+      const deeplink = WALLET_DEEPLINKS[selectedWallet]
+      if (deeplink) {
+        window.location.href = deeplink
       }
     }
-  }, [selectedWallet, isMobile, dappKeypair])
+  }, [selectedWallet])
 
   if (!isOpen) return null
 
@@ -135,18 +113,18 @@ export default function ConnectModal({
 
         {selectingWallet ? (
           <>
-            <ConnectButton onClick={() => setSelectedWallet('phantom')}>
-              <img src="/phantom.webp" alt="Phantom" />
-              Phantom
-            </ConnectButton>
-
             <ConnectButton onClick={() => setSelectedWallet('solflare')}>
               <img src="/solflare.svg" alt="Solflare" />
               Solflare
             </ConnectButton>
 
+             <ConnectButton onClick={() => setSelectedWallet('phantom')}>
+              <img src="/phantom.webp" alt="Phantom" />
+              Phantom
+            </ConnectButton>
+
             <ConnectButton onClick={() => setSelectedWallet('subwallet')}>
-              <img src="/subwallet.jpeg" alt="SubWallet" />
+              <img src="/subwallet.jpeg" alt="SubWallet" style={{ borderRadius: '6px' }} />
               SubWallet
             </ConnectButton>
 
