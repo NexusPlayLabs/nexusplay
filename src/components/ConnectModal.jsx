@@ -45,7 +45,7 @@ const Info = styled.p`
 `
 
 const ConnectButton = styled.button`
-  background: ${(p) => p.bg || '#03ffa4'};
+  background: ${(p) => p.bg || '#03ffa4'};  /* Neonová zelená */
   color: ${(p) => p.text || '#000'};
   font-weight: bold;
   border: 2px solid ${(p) => p.bg || '#03ffa4'};
@@ -67,7 +67,7 @@ const ConnectButton = styled.button`
   &:hover {
     background: ${(p) => (p.disabled ? p.bg : '#02e294')};
     box-shadow: ${(p) =>
-      p.disabled ? 'none' : '0 0 18px rgba(3, 255, 164, 0.5)'};
+      p.disabled ? 'none' : '0 0 18px rgba(3, 255, 164, 0.5)'}; 
   }
 
   & img {
@@ -135,14 +135,14 @@ export default function ConnectModal({
             {isMobile && (
               <ConnectButton bg="#555" text="#aaa" disabled>
                 <img src="/metamask.png" alt="MetaMask" />
-                MetaMask (is not supported)
+                MetaMask (not supported)
               </ConnectButton>
             )}
           </>
         ) : twitterConnected ? (
           <>
             <Info>
-              Twitter pripojený ako <b>{twitterUser}</b>
+              Twitter connected as <b>{twitterUser}</b>
             </Info>
             <ConnectButton
               bg="#00FFA3"
@@ -154,7 +154,7 @@ export default function ConnectModal({
                 }
               }}
             >
-              <img src="/wallet_logo.png" alt="Peňaženka" />
+              <img src="/wallet_logo.png" alt="Wallet" />
               Connect wallet
             </ConnectButton>
           </>
@@ -169,7 +169,7 @@ export default function ConnectModal({
               Connect Twitter
             </ConnectButton>
             <ConnectButton
-              bg="#00FFA3"
+              bg="#03ffa4"  /* Pôvodná farba */
               onClick={() => {
                 if (isMobile) {
                   setSelectingWallet(true)
@@ -178,8 +178,8 @@ export default function ConnectModal({
                 }
               }}
             >
-              <img src="/wallet_logo.png" alt="Peňaženka" />
-              Connect
+              <img src="/wallet_logo.png" alt="Wallet" />
+              Connect Wallet
             </ConnectButton>
           </>
         )}
